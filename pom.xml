@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.znmiller96</groupId>
-	<artifactId>PantryApp</artifactId>
+	<artifactId>pantry-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PantryApp</name>
 	<description>Pantry App used to track food in fridge and pantry</description>

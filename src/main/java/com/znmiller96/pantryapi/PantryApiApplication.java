@@ -1,13 +1,13 @@
-package com.znmiller96.PantryApp;
+package com.znmiller96.pantryapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PantryAppApplication {
+public class PantryApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PantryAppApplication.class, args);
+		SpringApplication.run(PantryApiApplication.class, args);
 	}
 
 }
