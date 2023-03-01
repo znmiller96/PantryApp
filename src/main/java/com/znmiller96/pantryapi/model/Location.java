@@ -19,8 +19,40 @@ public class Location {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    private Integer id;
+    private int id;
 
-    private Integer userid;
+    private int userid;
     private String location;
+
+    public Location(int userid, String location) {
+        this.userid = userid;
+        this.location = location;
+    }
+
+    public Location() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

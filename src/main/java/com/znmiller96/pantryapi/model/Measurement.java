@@ -20,11 +20,11 @@ public class Measurement {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    private Integer id;
+    private int id;
 
-    private Integer userid;
+    private int userid;
 
-    private Integer measurement;
+    private int measurement;
 
     private String measurementUnit;
 }

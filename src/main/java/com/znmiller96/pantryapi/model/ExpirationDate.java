@@ -10,7 +10,7 @@ public class ExpirationDate {
 
     //this is same as pantry id
     @Id
-    private Integer id;
+    private int id;
 
     private Date expirationDate;
 }

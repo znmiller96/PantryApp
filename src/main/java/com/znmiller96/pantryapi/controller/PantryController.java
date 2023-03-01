@@ -1,7 +1,10 @@
 package com.znmiller96.pantryapi.controller;
 
+import com.znmiller96.pantryapi.dto.LocationDto;
+import com.znmiller96.pantryapi.model.Location;
 import com.znmiller96.pantryapi.model.Pantry;
 import com.znmiller96.pantryapi.repository.PantryRepository;
+import com.znmiller96.pantryapi.service.PantryPageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +17,13 @@ import java.util.List;
 public class PantryController {
 
     private final PantryRepository pantryRepository;
+    private final PantryPageService pantryPageService;
 
-    public PantryController(PantryRepository pantryRepository) {
+    public PantryController(PantryRepository pantryRepository,
+                            PantryPageService pantryPageService) {
         this.pantryRepository = pantryRepository;
+        this.pantryPageService = pantryPageService;
+
     }
 
     //TODO POST add pantry list
@@ -32,9 +39,10 @@ public class PantryController {
 
     //TODO GET get list of pantry items
     @GetMapping
-    public List<Pantry> getPantry()
+    public List<LocationDto> getPantry()
     {
-        return pantryRepository.findAll();
+        return pantryPageService.getPantryLocations();
+        //return pantryRepository.findAll();
     }
 
     //TODO

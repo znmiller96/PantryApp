@@ -22,9 +22,9 @@ public class Pantry {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    private Integer id;
+    private int id;
     //user this item belongs to
-    private Integer userId;
+    private int userId;
     private String name;
 
     //TODO similar to expiration date have display of low amount of item
@@ -41,7 +41,7 @@ public class Pantry {
     private Date dayAdded;
     //expiration date adn used date are in separate table because they can be null
 
-    public void setUserId(Integer userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -49,11 +49,11 @@ public class Pantry {
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public Integer getUserId() {
+    public int getUserId() {
         return userId;
     }
 

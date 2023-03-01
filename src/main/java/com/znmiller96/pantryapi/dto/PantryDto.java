@@ -4,9 +4,9 @@ import com.znmiller96.pantryapi.util.QuantityLevel;
 
 import java.util.Date;
 
-public class PantryItemDto {
+public class PantryDto {
 
-    private Integer id;
+    private int id;
     private String name;
     private String amount;
     private QuantityLevel quantityLevel;
