@@ -11,6 +11,5 @@ public class UsedDate {
     //this is same as pantry id
     @Id
     private int id;
-
     private Date usedDate;
 }

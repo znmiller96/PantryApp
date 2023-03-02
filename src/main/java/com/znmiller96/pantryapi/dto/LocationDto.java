@@ -3,7 +3,6 @@ package com.znmiller96.pantryapi.dto;
 public class LocationDto {
 
     private int id;
-
     private String location;
 
     private LocationDto(Builder builder) {
@@ -23,8 +22,6 @@ public class LocationDto {
 
         private int id;
         private String location;
-
-        public Builder() {}
 
         public Builder withId(int id) {
             this.id = id;

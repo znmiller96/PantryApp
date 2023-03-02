@@ -1,7 +1,10 @@
 package com.znmiller96.pantryapi.service;
 
+import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
+import com.znmiller96.pantryapi.model.Catrgory;
 import com.znmiller96.pantryapi.model.Location;
+import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
 import org.springframework.stereotype.Component;
@@ -14,24 +17,37 @@ public class PantryPageService {
 
     private final PantryRepository pantryRepository;
     private final LocationRepository locationRepository;
+    private final CategoryRepository categoryRepository;
 
     public PantryPageService(
             PantryRepository pantryRepository,
-            LocationRepository locationRepository) {
+            LocationRepository locationRepository,
+            CategoryRepository categoryRepository) {
         this.pantryRepository = pantryRepository;
         this.locationRepository = locationRepository;
+        this.categoryRepository = categoryRepository;
     }
 
 
     //TODO get Pantry page info
 
-    //TODO get list of locations
+    public List<LocationDto> getPantryLocations(int userId) {
+        return locationRepository.findAllByUserid(userId)
+                .stream().map(x ->
+                        new LocationDto.Builder()
+                                .withId(x.getId())
+                                .withLocation(x.getLocation())
+                                .build())
+                .collect(Collectors.toList());
+    }
 
-    public List<LocationDto> getPantryLocations() {
-        return locationRepository.findAllByUserid(1001).stream().map(x -> new LocationDto.Builder()
-                                                                                    .withId(x.getId())
-                                                                                    .withLocation(x.getLocation())
-                                                                                    .build())
-                                                                                        .collect(Collectors.toList());
+    public List<CategoryDto> getPantryCategories(int userId) {
+        return categoryRepository.findAllByUserid(userId)
+                .stream().map(x ->
+                        new CategoryDto.Builder()
+                                .withId(x.getId())
+                                .withCategory(x.getCategory())
+                                .build())
+                .collect(Collectors.toList());
     }
 }

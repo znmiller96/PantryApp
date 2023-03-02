@@ -12,6 +12,7 @@ import jakarta.persistence.SequenceGenerator;
 @Entity
 public class Catrgory {
 
+    //TODO change sequence names
     @Id
     @SequenceGenerator(
             name = "pantry_id_sequence",
@@ -24,8 +25,37 @@ public class Catrgory {
             generator = "pantry_id_sequence"
     )
     private int id;
-
     private int userid;
-
     private String category;
+
+    public Catrgory(int userid, String category) {
+        this.userid = userid;
+        this.category = category;
+    }
+
+    public Catrgory() {}
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }

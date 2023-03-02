@@ -1,5 +1,6 @@
 package com.znmiller96.pantryapi.controller;
 
+import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
 import com.znmiller96.pantryapi.model.Location;
 import com.znmiller96.pantryapi.model.Pantry;
@@ -39,9 +40,10 @@ public class PantryController {
 
     //TODO GET get list of pantry items
     @GetMapping
-    public List<LocationDto> getPantry()
+    public List<CategoryDto> getPantry()
     {
-        return pantryPageService.getPantryLocations();
+        return pantryPageService.getPantryCategories(1001);
+        //return pantryPageService.getPantryLocations(1001);
         //return pantryRepository.findAll();
     }
 

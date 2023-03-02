@@ -21,10 +21,7 @@ public class Measurement {
             generator = "pantry_id_sequence"
     )
     private int id;
-
     private int userid;
-
     private int measurement;
-
     private String measurementUnit;
 }
