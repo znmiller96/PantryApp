@@ -2,8 +2,6 @@ package com.znmiller96.pantryapi.service;
 
 import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
-import com.znmiller96.pantryapi.model.Catrgory;
-import com.znmiller96.pantryapi.model.Location;
 import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;

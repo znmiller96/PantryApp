@@ -15,14 +15,14 @@ public class Catrgory {
     //TODO change sequence names
     @Id
     @SequenceGenerator(
-            name = "pantry_id_sequence",
-            sequenceName = "pantry_id_sequence",
+            name = "category_id_sequence",
+            sequenceName = "category_id_sequence",
             allocationSize = 1,
             initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "pantry_id_sequence"
+            generator = "category_id_sequence"
     )
     private int id;
     private int userid;

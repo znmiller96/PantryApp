@@ -10,14 +10,14 @@ public class Location {
 
     @Id
     @SequenceGenerator(
-            name = "pantry_id_sequence",
-            sequenceName = "pantry_id_sequence",
+            name = "location_id_sequence",
+            sequenceName = "location_id_sequence",
             allocationSize = 1,
             initialValue = 1000
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "pantry_id_sequence"
+            generator = "location_id_sequence"
     )
     private int id;
 
