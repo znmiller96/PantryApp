@@ -2,6 +2,8 @@ package com.znmiller96.pantryapi.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 /**
  * Customers' locations in kitchen
  */
@@ -23,6 +25,9 @@ public class Location {
 
     private int userid;
     private String location;
+
+    @OneToMany(mappedBy = "location")
+    private List<Pantry> pantry;
 
     public Location(int userid, String location) {
         this.userid = userid;

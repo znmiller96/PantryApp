@@ -4,13 +4,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
+
+import java.util.List;
 
 /**
  * Customers' personalized categories for sorting food
  */
 @Entity
-public class Catrgory {
+public class Category {
 
     //TODO change sequence names
     @Id
@@ -28,12 +31,15 @@ public class Catrgory {
     private int userid;
     private String category;
 
-    public Catrgory(int userid, String category) {
+    @OneToMany(mappedBy = "category")
+    private List<Pantry> pantry;
+
+    public Category(int userid, String category) {
         this.userid = userid;
         this.category = category;
     }
 
-    public Catrgory() {}
+    public Category() {}
 
     public int getId() {
         return id;

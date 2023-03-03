@@ -2,6 +2,7 @@ package com.znmiller96.pantryapi.service;
 
 import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
+import com.znmiller96.pantryapi.model.Pantry;
 import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
@@ -28,6 +29,10 @@ public class PantryPageService {
 
 
     //TODO get Pantry page info
+
+    public List<Pantry> getPantryItems(int userid) {
+        return pantryRepository.findAll();
+    }
 
     public List<LocationDto> getPantryLocations(int userId) {
         return locationRepository.findAllByUserid(userId)

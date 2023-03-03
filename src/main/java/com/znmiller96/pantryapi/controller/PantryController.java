@@ -2,7 +2,6 @@ package com.znmiller96.pantryapi.controller;
 
 import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
-import com.znmiller96.pantryapi.model.Location;
 import com.znmiller96.pantryapi.model.Pantry;
 import com.znmiller96.pantryapi.repository.PantryRepository;
 import com.znmiller96.pantryapi.service.PantryPageService;
@@ -17,12 +16,9 @@ import java.util.List;
 @RequestMapping("api/v1/pantry")
 public class PantryController {
 
-    private final PantryRepository pantryRepository;
     private final PantryPageService pantryPageService;
 
-    public PantryController(PantryRepository pantryRepository,
-                            PantryPageService pantryPageService) {
-        this.pantryRepository = pantryRepository;
+    public PantryController(PantryPageService pantryPageService) {
         this.pantryPageService = pantryPageService;
 
     }
@@ -31,20 +27,23 @@ public class PantryController {
     @PostMapping
     public void addPantryItem()
     {
-        Pantry pantry = new Pantry();
-        pantry.setName("test");
-        pantry.setUserId(102);
 
-        pantryRepository.save(pantry);
     }
 
     //TODO GET get list of pantry items
-    @GetMapping
-    public List<CategoryDto> getPantry()
-    {
+    @GetMapping("/l")
+    public List<LocationDto> getLocations() {
+        return pantryPageService.getPantryLocations(1001);
+    }
+
+    @GetMapping("/c")
+    public List<CategoryDto> getCategories() {
         return pantryPageService.getPantryCategories(1001);
-        //return pantryPageService.getPantryLocations(1001);
-        //return pantryRepository.findAll();
+    }
+
+    @GetMapping("/p")
+    public List<Pantry> getPantry() {
+        return pantryPageService.getPantryItems(1001);
     }
 
     //TODO
