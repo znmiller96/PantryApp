@@ -2,14 +2,15 @@ package com.znmiller96.pantryapi.controller;
 
 import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
-import com.znmiller96.pantryapi.model.Pantry;
-import com.znmiller96.pantryapi.repository.PantryRepository;
+import com.znmiller96.pantryapi.dto.PantryDto;
+import com.znmiller96.pantryapi.model.ExpirationDate;
 import com.znmiller96.pantryapi.service.PantryPageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -42,8 +43,14 @@ public class PantryController {
     }
 
     @GetMapping("/p")
-    public List<Pantry> getPantry() {
+    public List<PantryDto> getPantry() {
         return pantryPageService.getPantryItems(1001);
+    }
+
+    @GetMapping("/e")
+    public Date getExpirationDate() {
+        List<ExpirationDate> expirationDates = pantryPageService.getExpirationDate(1000);
+        return expirationDates.get(0).getExpirationDate();
     }
 
     //TODO

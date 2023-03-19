@@ -1,10 +1,13 @@
 package com.znmiller96.pantryapi.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.SequenceGenerator;
 
 import java.util.Date;
@@ -43,6 +46,9 @@ public class Pantry {
     private Location location;
 
     //TODO one to one for expiration date, measurement, used date
+    @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private ExpirationDate expirationDate;
 
 
     public Pantry() {}
@@ -128,5 +134,13 @@ public class Pantry {
 
     public void setLocation(Location locationId) {
         this.location = locationId;
+    }
+
+    public ExpirationDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(ExpirationDate expirationDate) {
+        this.expirationDate = expirationDate;
     }
 }
