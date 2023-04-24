@@ -50,6 +50,14 @@ public class Pantry {
     @PrimaryKeyJoinColumn
     private ExpirationDate expirationDate;
 
+    @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private UsedDate usedDate;
+
+    @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Measurement measurement;
+
 
     public Pantry() {}
 
@@ -142,5 +150,21 @@ public class Pantry {
 
     public void setExpirationDate(ExpirationDate expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public UsedDate getUsedDate() {
+        return usedDate;
+    }
+
+    public void setUsedDate(UsedDate usedDate) {
+        this.usedDate = usedDate;
+    }
+
+    public Measurement getMeasurement() {
+        return measurement;
+    }
+
+    public void setMeasurement(Measurement measurement) {
+        this.measurement = measurement;
     }
 }

@@ -52,6 +52,4 @@ public class PantryController {
         List<ExpirationDate> expirationDates = pantryPageService.getExpirationDate(1000);
         return expirationDates.get(0).getExpirationDate();
     }
-
-    //TODO
 }

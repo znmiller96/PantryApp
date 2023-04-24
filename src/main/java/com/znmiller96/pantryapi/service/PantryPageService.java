@@ -2,6 +2,7 @@ package com.znmiller96.pantryapi.service;
 
 import com.znmiller96.pantryapi.dto.CategoryDto;
 import com.znmiller96.pantryapi.dto.LocationDto;
+import com.znmiller96.pantryapi.dto.MeasurementDto;
 import com.znmiller96.pantryapi.dto.PantryDto;
 import com.znmiller96.pantryapi.model.ExpirationDate;
 import com.znmiller96.pantryapi.model.Pantry;
@@ -9,6 +10,7 @@ import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.repository.ExpirationDateRepository;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
+import com.znmiller96.pantryapi.util.MeasurementUnit;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import org.springframework.stereotype.Component;
 
@@ -60,10 +62,18 @@ public class PantryPageService {
                         .withLocation(pantry.getLocation().getLocation())
                         .build());
 
-        if(pantry.getExpirationDate() != null) {
+        if (pantry.getExpirationDate() != null) {
             pantryBuilder.withExpirationDate(pantry.getExpirationDate().getExpirationDate());
         }
-        //TODO used date and measurement logic
+        if (pantry.getUsedDate() != null) {
+            pantryBuilder.withUsedDate(pantry.getUsedDate().getUsedDate());
+        }
+        if (pantry.getMeasurement() != null) {
+            pantryBuilder.withMeasurement(new MeasurementDto.Builder()
+                    .withValue(pantry.getMeasurement().getValue())
+                    .withUnit(MeasurementUnit.valueOf(pantry.getMeasurement().getUnit()))
+                    .build());
+        }
 
         return pantryBuilder.build();
     }

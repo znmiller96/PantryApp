@@ -22,9 +22,8 @@ public class PantryDto {
     private Date expirationDate;
     @Nullable
     private Date usedDate;
-    //TODO create measurementDto
     @Nullable
-    private String measurement;
+    private MeasurementDto measurement;
 
     private PantryDto(Builder builder) {
         this.id = builder.id;
@@ -80,7 +79,7 @@ public class PantryDto {
         return usedDate;
     }
 
-    public String getMeasurement() {
+    public MeasurementDto getMeasurement() {
         return measurement;
     }
 
@@ -96,7 +95,7 @@ public class PantryDto {
         private LocationDto location;
         private Date expirationDate;
         private Date usedDate;
-        private String measurement;
+        private MeasurementDto measurement;
 
         public Builder withId(int id) {
             this.id = id;
@@ -148,7 +147,7 @@ public class PantryDto {
             return this;
         }
 
-        public Builder withMeasurement(String measurement) {
+        public Builder withMeasurement(MeasurementDto measurement) {
             this.measurement = measurement;
             return this;
         }
