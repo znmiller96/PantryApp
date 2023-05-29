@@ -1,4 +1,4 @@
-package com.znmiller96.pantryapi.model;
+package com.znmiller96.pantryapi.model.dao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

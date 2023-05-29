@@ -1,11 +1,11 @@
 package com.znmiller96.pantryapi;
 
-import com.znmiller96.pantryapi.model.Category;
-import com.znmiller96.pantryapi.model.ExpirationDate;
-import com.znmiller96.pantryapi.model.Location;
-import com.znmiller96.pantryapi.model.Measurement;
-import com.znmiller96.pantryapi.model.Pantry;
-import com.znmiller96.pantryapi.model.UsedDate;
+import com.znmiller96.pantryapi.model.dao.Category;
+import com.znmiller96.pantryapi.model.dao.ExpirationDate;
+import com.znmiller96.pantryapi.model.dao.Location;
+import com.znmiller96.pantryapi.model.dao.Measurement;
+import com.znmiller96.pantryapi.model.dao.Pantry;
+import com.znmiller96.pantryapi.model.dao.UsedDate;
 import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
@@ -25,7 +25,6 @@ public class LoadDatabase {
                                    CategoryRepository categoryRepository,
                                    PantryRepository pantryRepository) {
         return args -> {
-            //TODO Add builders to models
             locationRepository.save(new Location(1001, "Fridge"));
             locationRepository.save(new Location(1001, "Freezer"));
             locationRepository.save(new Location(1001, "Corner Cabinet"));

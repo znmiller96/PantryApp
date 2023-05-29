@@ -1,13 +1,16 @@
 package com.znmiller96.pantryapi.controller;
 
-import com.znmiller96.pantryapi.dto.CategoryDto;
-import com.znmiller96.pantryapi.dto.LocationDto;
-import com.znmiller96.pantryapi.dto.PantryDto;
-import com.znmiller96.pantryapi.model.ExpirationDate;
+import com.znmiller96.pantryapi.model.dto.CategoryDto;
+import com.znmiller96.pantryapi.model.dto.LocationDto;
+import com.znmiller96.pantryapi.model.dto.PantryDto;
+import com.znmiller96.pantryapi.model.request.body.AddLocationRequestBody;
+import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.service.PantryPageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -24,27 +27,53 @@ public class PantryController {
 
     }
 
-    //TODO POST add pantry list
+
     @PostMapping
-    public void addPantryItem()
-    {
+    public void addPantryItem() {
 
     }
 
-    //TODO GET get list of pantry items
-    @GetMapping("/l")
-    public List<LocationDto> getLocations() {
-        return pantryPageService.getPantryLocations(1001);
+    //TODO addPantryItemList
+
+    //TODO addLocation
+    @PostMapping("/Location")
+    public AddLocationRequestBody addLocation(@RequestBody AddLocationRequestBody location) {
+        return location;
     }
 
-    @GetMapping("/c")
-    public List<CategoryDto> getCategories() {
-        return pantryPageService.getPantryCategories(1001);
+    //TODO addCategory
+
+    //TODO updatePantryItem
+
+    //TODO updatePantryItemList
+
+    //TODO updateLocation
+
+    //TODO updateCategory
+
+    //TODO deletePantryItem
+
+    //TODO deletePantryItemList
+
+    //TODO deleteLocation
+
+    //TODO deleteCategory
+
+    //TODO getPantryPage sends formatted info for the user's pantry page
+
+    @GetMapping("/Locations")
+    public List<LocationDto> getLocations(@RequestParam int id) {
+        return pantryPageService.getPantryLocations(id);
     }
 
-    @GetMapping("/p")
-    public List<PantryDto> getPantry() {
-        return pantryPageService.getPantryItems(1001);
+    @GetMapping("/Categories")
+    public List<CategoryDto> getCategories(@RequestParam int id) {
+        return pantryPageService.getPantryCategories(id);
+    }
+
+    @GetMapping("/Pantry")
+    public List<PantryDto> getPantry(@RequestParam int id) {
+        return pantryPageService.getPantryItems(id);
     }
 
     @GetMapping("/e")

@@ -1,4 +1,4 @@
-package com.znmiller96.pantryapi.model;
+package com.znmiller96.pantryapi.model.dao;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

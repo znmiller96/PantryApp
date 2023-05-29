@@ -1,4 +1,4 @@
-package com.znmiller96.pantryapi.dto;
+package com.znmiller96.pantryapi.model.dto;
 
 public class CategoryDto {
 

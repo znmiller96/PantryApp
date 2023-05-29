@@ -1,4 +1,4 @@
-package com.znmiller96.pantryapi.model;
+package com.znmiller96.pantryapi.model.dao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,10 +10,8 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
-import java.util.Date;
-
 @Entity
-public class ExpirationDate {
+public class Measurement {
 
     //this is same as pantry id
     @Id
@@ -29,22 +27,26 @@ public class ExpirationDate {
     )
     @Column(name = "id")
     private int id;
-    private Date expirationDate;
+    private float value;
+    private String unit;
+
     @OneToOne
     @JoinColumn(name = "id")
     @MapsId
     private Pantry pantry;
 
-    public ExpirationDate() {
+    public Measurement() {
     }
 
-    public ExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public Measurement(float value, String unit) {
+        this.value = value;
+        this.unit = unit;
     }
 
-    public ExpirationDate(int id, Date expirationDate, Pantry pantry) {
+    public Measurement(int id, float value, String unit, Pantry pantry) {
         this.id = id;
-        this.expirationDate = expirationDate;
+        this.value = value;
+        this.unit = unit;
         this.pantry = pantry;
     }
 
@@ -56,12 +58,20 @@ public class ExpirationDate {
         this.id = id;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public float getValue() {
+        return value;
     }
 
-    public void setExpirationDate(Date expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setValue(float value) {
+        this.value = value;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
     public Pantry getPantry() {

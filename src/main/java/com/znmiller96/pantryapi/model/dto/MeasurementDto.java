@@ -1,4 +1,4 @@
-package com.znmiller96.pantryapi.dto;
+package com.znmiller96.pantryapi.model.dto;
 
 import com.znmiller96.pantryapi.util.MeasurementUnit;
 

@@ -1,6 +1,6 @@
 package com.znmiller96.pantryapi.repository;
 
-import com.znmiller96.pantryapi.model.Category;
+import com.znmiller96.pantryapi.model.dao.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
