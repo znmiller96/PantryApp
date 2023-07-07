@@ -1,9 +1,15 @@
 package com.znmiller96.pantryapi.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+@JsonDeserialize(builder = LocationDto.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class LocationDto {
 
-    private int id;
-    private String location;
+    private final int id;
+    private final String location;
 
     private LocationDto(Builder builder) {
         this.id = builder.id;
@@ -18,6 +24,7 @@ public class LocationDto {
         return location;
     }
 
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
         private int id;

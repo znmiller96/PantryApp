@@ -25,43 +25,88 @@ public class LoadDatabase {
                                    CategoryRepository categoryRepository,
                                    PantryRepository pantryRepository) {
         return args -> {
-            locationRepository.save(new Location(1001, "Fridge"));
-            locationRepository.save(new Location(1001, "Freezer"));
-            locationRepository.save(new Location(1001, "Corner Cabinet"));
-            locationRepository.save(new Location(1001, "Cabinet Left of Microwave"));
+            locationRepository.save(new Location.Builder()
+                    .withUserid(1001)
+                    .withLocation("Fridge")
+                    .build());
+            locationRepository.save(new Location.Builder()
+                    .withUserid(1001)
+                    .withLocation("Freezer")
+                    .build());
+            locationRepository.save(new Location.Builder()
+                    .withUserid(1001)
+                    .withLocation("Corner Cabinet")
+                    .build());
+            locationRepository.save(new Location.Builder()
+                    .withUserid(1001)
+                    .withLocation("Cabinet Left of Microwave")
+                    .build());
 
-            categoryRepository.save(new Category(1001, "Dairy"));
-            categoryRepository.save(new Category(1001, "Baking"));
+            categoryRepository.save(new Category.Builder()
+                    .withUserid(1001)
+                    .withCategory("Dairy")
+                    .build());
+            categoryRepository.save(new Category.Builder()
+                    .withUserid(1001)
+                    .withCategory("Baking")
+                    .build());
 
             //Pantry Item with everything
-            Location location = new Location(1001, "Fridge");
-            location.setId(1000);
-            Category category = new Category(1001, "Dairy");
-            category.setId(1000);
+            Location location = new Location.Builder()
+                    .withId(1000)
+                    .build();
+            Category category = new Category.Builder()
+                    .withId(1000)
+                    .build();
 
-            Pantry pantry = new Pantry(1001, "Pantry Item", QuantityLevel.HIGH.name(), false, true, new Date(), category, location);
+            Pantry pantry = new Pantry.Builder()
+                    .withUserId(1001)
+                    .withName("Pantry Item")
+                    .withQuantityLevel(QuantityLevel.HIGH.name())
+                    .withFavorite(false)
+                    .withUsed(true)
+                    .withDayAdded(new Date())
+                    .withCategory(category)
+                    .withLocation(location)
+                    .build();
 
-            ExpirationDate expirationDate = new ExpirationDate();
+            ExpirationDate expirationDate = new ExpirationDate.Builder()
+                    .withExpirationDate(new Date())
+                    .build();
+
             pantry.setExpirationDate(expirationDate);
             expirationDate.setPantry(pantry);
-            expirationDate.setExpirationDate(new Date());
 
-            UsedDate usedDate = new UsedDate();
+            UsedDate usedDate = new UsedDate.Builder()
+                    .withUsedDate(new Date())
+                    .build();
+
             pantry.setUsedDate(usedDate);
             usedDate.setPantry(pantry);
-            usedDate.setUsedDate(new Date());
 
-            Measurement measurement = new Measurement();
+            Measurement measurement = new Measurement.Builder()
+                    .withValue(40)
+                    .withUnit(MeasurementUnit.OZ.name())
+                    .build();
+
             pantry.setMeasurement(measurement);
             measurement.setPantry(pantry);
-            measurement.setValue(40);
-            measurement.setUnit(MeasurementUnit.OZ.name());
 
             pantryRepository.save(pantry);
 
             //Pantry item with no expiration date, used date, or measurement
-            Pantry pantryNoExpirationDate = new Pantry(1001, "Pantry Item No Expiration Date", QuantityLevel.HIGH.name(), false, false, new Date(), category, location);
-            pantryRepository.save(pantryNoExpirationDate);
+            Pantry pantryNoDates = new Pantry.Builder()
+                    .withUserId(1001)
+                    .withName("Pantry Item No Expiration Date")
+                    .withQuantityLevel(QuantityLevel.HIGH.name())
+                    .withFavorite(false)
+                    .withUsed(false)
+                    .withDayAdded(new Date())
+                    .withCategory(category)
+                    .withLocation(location)
+                    .build();
+
+            pantryRepository.save(pantryNoDates);
         };
     }
 }

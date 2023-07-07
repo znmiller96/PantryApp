@@ -1,5 +1,8 @@
 package com.znmiller96.pantryapi.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -8,6 +11,8 @@ import java.util.List;
  * Customers' locations in kitchen
  */
 @Entity
+@JsonDeserialize(builder = Location.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Location {
 
     @Id
@@ -29,9 +34,11 @@ public class Location {
     @OneToMany(mappedBy = "location")
     private List<Pantry> pantry;
 
-    public Location(int userid, String location) {
-        this.userid = userid;
-        this.location = location;
+    public Location(Builder builder) {
+        this.id = builder.id;
+        this.userid = builder.userid;
+        this.location = builder.location;
+        this.pantry = builder.pantry;
     }
 
     public Location() {}
@@ -40,23 +47,44 @@ public class Location {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getUserid() {
         return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
+    public static class Builder {
+
+        private int userid;
+        private String location;
+        private int id;
+        private List<Pantry> pantry;
+
+        public Builder withUserid(int userid) {
+            this.userid = userid;
+            return this;
+        }
+
+        public Builder withLocation(String location) {
+            this.location = location;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPantry(List<Pantry> pantry) {
+            this.pantry = pantry;
+            return this;
+        }
+
+        public Location build() {
+            return new Location(this);
+        }
     }
 }

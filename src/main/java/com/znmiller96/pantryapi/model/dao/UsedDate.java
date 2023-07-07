@@ -1,5 +1,8 @@
 package com.znmiller96.pantryapi.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +16,8 @@ import jakarta.persistence.SequenceGenerator;
 import java.util.Date;
 
 @Entity
+@JsonDeserialize(builder = UsedDate.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UsedDate {
 
     //this is same as pantry id
@@ -39,30 +44,18 @@ public class UsedDate {
     public UsedDate() {
     }
 
-    public UsedDate(Date usedDate) {
-        this.usedDate = usedDate;
-    }
-
-    public UsedDate(int id, Date usedDate, Pantry pantry) {
-        this.id = id;
-        this.usedDate = usedDate;
-        this.pantry = pantry;
+    private UsedDate(Builder builder) {
+        this.id = builder.id;
+        this.usedDate = builder.usedDate;
+        this.pantry = builder.pantry;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Date getUsedDate() {
         return usedDate;
-    }
-
-    public void setUsedDate(Date usedDate) {
-        this.usedDate = usedDate;
     }
 
     public Pantry getPantry() {
@@ -71,5 +64,32 @@ public class UsedDate {
 
     public void setPantry(Pantry pantry) {
         this.pantry = pantry;
+    }
+
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
+    public static class Builder {
+
+        private Date usedDate;
+        private int id;
+        private Pantry pantry;
+
+        public Builder withUsedDate(Date usedDate) {
+            this.usedDate = usedDate;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPantry(Pantry pantry) {
+            this.pantry = pantry;
+            return this;
+        }
+
+        public UsedDate build() {
+            return new UsedDate(this);
+        }
     }
 }

@@ -1,5 +1,8 @@
 package com.znmiller96.pantryapi.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +16,8 @@ import java.util.List;
  * Customers' personalized categories for sorting food
  */
 @Entity
+@JsonDeserialize(builder = Category.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
 
     //TODO change sequence names
@@ -34,9 +39,11 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private List<Pantry> pantry;
 
-    public Category(int userid, String category) {
-        this.userid = userid;
-        this.category = category;
+    private Category(Builder builder) {
+        this.id = builder.id;
+        this.userid = builder.userid;
+        this.category = builder.category;
+        this.pantry = builder.pantry;
     }
 
     public Category() {}
@@ -45,23 +52,44 @@ public class Category {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getUserid() {
         return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
+    public static class Builder {
+
+        private int id;
+        private int userid;
+        private String category;
+        private List<Pantry> pantry;
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withUserid(int userid) {
+            this.userid = userid;
+            return this;
+        }
+
+        public Builder withCategory(String category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder withPantry(List<Pantry> pantry) {
+            this.pantry = pantry;
+            return this;
+        }
+
+        public Category build() {
+            return new Category(this);
+        }
     }
 }

@@ -1,16 +1,19 @@
-package com.znmiller96.pantryapi.model.dto;
+package com.znmiller96.pantryapi.model.request.body;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.znmiller96.pantryapi.model.dto.CategoryDto;
+import com.znmiller96.pantryapi.model.dto.LocationDto;
+import com.znmiller96.pantryapi.model.dto.MeasurementDto;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import jakarta.annotation.Nullable;
 
 import java.util.Date;
 
-@JsonDeserialize(builder = PantryDto.Builder.class)
+@JsonDeserialize(builder = AddPantryItemRequestBody.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PantryDto {
+public class AddPantryItemRequestBody {
 
     private final int id;
     private final String name;
@@ -28,7 +31,8 @@ public class PantryDto {
     @Nullable
     private final MeasurementDto measurement;
 
-    private PantryDto(Builder builder) {
+
+    private AddPantryItemRequestBody(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;;
         this.quantityLevel = builder.quantityLevel;
@@ -156,8 +160,8 @@ public class PantryDto {
             return this;
         }
 
-        public PantryDto build() {
-            return new PantryDto(this);
+        public AddPantryItemRequestBody build() {
+            return new AddPantryItemRequestBody(this);
         }
     }
 }

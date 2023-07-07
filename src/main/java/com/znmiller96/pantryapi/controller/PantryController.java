@@ -3,8 +3,10 @@ package com.znmiller96.pantryapi.controller;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
+import com.znmiller96.pantryapi.model.request.body.AddCategoryRequestBody;
 import com.znmiller96.pantryapi.model.request.body.AddLocationRequestBody;
 import com.znmiller96.pantryapi.model.dao.ExpirationDate;
+import com.znmiller96.pantryapi.model.request.body.AddPantryItemRequestBody;
 import com.znmiller96.pantryapi.service.PantryPageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,21 +29,23 @@ public class PantryController {
 
     }
 
-
-    @PostMapping
-    public void addPantryItem() {
-
-    }
-
     //TODO addPantryItemList
 
-    //TODO addLocation
-    @PostMapping("/Location")
-    public AddLocationRequestBody addLocation(@RequestBody AddLocationRequestBody location) {
-        return location;
+    @PostMapping("/add/location")
+    public void addLocation(@RequestBody AddLocationRequestBody addLocationRequestBody) {
+        pantryPageService.addPantryLocation(addLocationRequestBody.getId(), addLocationRequestBody.getLocationList());
+        //return addLocationRequestBody;
     }
 
-    //TODO addCategory
+    @PostMapping("/add/category")
+    public void addCategory(@RequestBody AddCategoryRequestBody addCategoryRequestBody) {
+        pantryPageService.addPantryCategory(addCategoryRequestBody.getId(), addCategoryRequestBody.getCategoryList());
+    }
+
+    @PostMapping("/add/pantryItem")
+    public AddPantryItemRequestBody addPantryItem(@RequestBody AddPantryItemRequestBody addPantryItemRequestBody) {
+        return addPantryItemRequestBody;
+    }
 
     //TODO updatePantryItem
 

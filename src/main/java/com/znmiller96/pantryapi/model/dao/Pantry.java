@@ -61,15 +61,15 @@ public class Pantry {
 
     public Pantry() {}
 
-    public Pantry(int userId, String name, String quantityLevel, Boolean favorite, Boolean used, Date dayAdded, Category category, Location location) {
-        this.userId = userId;
-        this.name = name;
-        this.quantityLevel = quantityLevel;
-        this.favorite = favorite;
-        this.used = used;
-        this.dayAdded = dayAdded;
-        this.category = category;
-        this.location = location;
+    public Pantry(Builder builder) {
+        this.userId = builder.userId;
+        this.name = builder.name;
+        this.quantityLevel = builder.quantityLevel;
+        this.favorite = builder.favorite;
+        this.used = builder.used;
+        this.dayAdded = builder.dayAdded;
+        this.category = builder.category;
+        this.location = builder.location;
     }
 
     public int getId() {
@@ -166,5 +166,61 @@ public class Pantry {
 
     public void setMeasurement(Measurement measurement) {
         this.measurement = measurement;
+    }
+
+    public static class Builder {
+
+        private int userId;
+        private String name;
+        private String quantityLevel;
+        private Boolean favorite;
+        private Boolean used;
+        private Date dayAdded;
+        private Category category;
+        private Location location;
+
+        public Builder withUserId(int userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withQuantityLevel(String quantityLevel) {
+            this.quantityLevel = quantityLevel;
+            return this;
+        }
+
+        public Builder withFavorite(Boolean favorite) {
+            this.favorite = favorite;
+            return this;
+        }
+
+        public Builder withUsed(Boolean used) {
+            this.used = used;
+            return this;
+        }
+
+        public Builder withDayAdded(Date dayAdded) {
+            this.dayAdded = dayAdded;
+            return this;
+        }
+
+        public Builder withCategory(Category category) {
+            this.category = category;
+            return this;
+        }
+
+        public Builder withLocation(Location location) {
+            this.location = location;
+            return this;
+        }
+
+        public Pantry build() {
+            return new Pantry(this);
+        }
     }
 }

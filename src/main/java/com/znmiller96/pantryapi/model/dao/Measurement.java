@@ -1,5 +1,8 @@
 package com.znmiller96.pantryapi.model.dao;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +14,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 
 @Entity
+@JsonDeserialize(builder = Measurement.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Measurement {
 
     //this is same as pantry id
@@ -38,40 +43,23 @@ public class Measurement {
     public Measurement() {
     }
 
-    public Measurement(float value, String unit) {
-        this.value = value;
-        this.unit = unit;
-    }
-
-    public Measurement(int id, float value, String unit, Pantry pantry) {
-        this.id = id;
-        this.value = value;
-        this.unit = unit;
-        this.pantry = pantry;
+    private Measurement(Builder builder) {
+        this.id = builder.id;
+        this.value = builder.value;
+        this.unit = builder.unit;
+        this.pantry = builder.pantry;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public float getValue() {
         return value;
     }
 
-    public void setValue(float value) {
-        this.value = value;
-    }
-
     public String getUnit() {
         return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
     }
 
     public Pantry getPantry() {
@@ -80,5 +68,38 @@ public class Measurement {
 
     public void setPantry(Pantry pantry) {
         this.pantry = pantry;
+    }
+
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
+    public static class Builder {
+
+        private float value;
+        private String unit;
+        private int id;
+        private Pantry pantry;
+
+        public Builder withValue(float value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder withUnit(String unit) {
+            this.unit = unit;
+            return this;
+        }
+
+        public Builder withId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withPantry(Pantry pantry) {
+            this.pantry = pantry;
+            return this;
+        }
+
+        public Measurement build() {
+            return new Measurement(this);
+        }
     }
 }

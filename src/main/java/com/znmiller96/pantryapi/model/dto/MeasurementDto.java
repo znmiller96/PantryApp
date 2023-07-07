@@ -1,12 +1,17 @@
 package com.znmiller96.pantryapi.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.znmiller96.pantryapi.util.MeasurementUnit;
 
+@JsonDeserialize(builder = MeasurementDto.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MeasurementDto {
 
-    private float value;
+    private final float value;
 
-    private MeasurementUnit unit;
+    private final MeasurementUnit unit;
 
     private MeasurementDto(Builder builder) {
         this.value = builder.value;
@@ -21,6 +26,7 @@ public class MeasurementDto {
         return unit;
     }
 
+    @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
         private float value;
