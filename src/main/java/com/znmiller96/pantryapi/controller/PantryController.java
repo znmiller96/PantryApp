@@ -6,8 +6,9 @@ import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.model.request.body.AddCategoryRequestBody;
 import com.znmiller96.pantryapi.model.request.body.AddLocationRequestBody;
 import com.znmiller96.pantryapi.model.dao.ExpirationDate;
-import com.znmiller96.pantryapi.model.request.body.AddPantryItemRequestBody;
+import com.znmiller96.pantryapi.model.request.body.PantryItemRequestBody;
 import com.znmiller96.pantryapi.service.PantryPageService;
+import com.znmiller96.pantryapi.util.Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/pantry")
@@ -33,18 +35,19 @@ public class PantryController {
 
     @PostMapping("/add/location")
     public void addLocation(@RequestBody AddLocationRequestBody addLocationRequestBody) {
-        pantryPageService.addPantryLocation(addLocationRequestBody.getId(), addLocationRequestBody.getLocationList());
+        pantryPageService.addPantryLocation(addLocationRequestBody.getUserId(), addLocationRequestBody.getLocationList());
         //return addLocationRequestBody;
     }
 
     @PostMapping("/add/category")
     public void addCategory(@RequestBody AddCategoryRequestBody addCategoryRequestBody) {
-        pantryPageService.addPantryCategory(addCategoryRequestBody.getId(), addCategoryRequestBody.getCategoryList());
+        pantryPageService.addPantryCategory(addCategoryRequestBody.getUserId(), addCategoryRequestBody.getCategoryList());
     }
 
     @PostMapping("/add/pantryItem")
-    public AddPantryItemRequestBody addPantryItem(@RequestBody AddPantryItemRequestBody addPantryItemRequestBody) {
-        return addPantryItemRequestBody;
+    public void addPantryItem(@RequestParam int userId, @RequestBody List<PantryItemRequestBody> pantryItemRequestBody) {
+        List<PantryDto> pantryList = pantryItemRequestBody.stream().map(Utils::pantryItemRequestBodyToDto).toList();
+        pantryPageService.addPantryItem(userId, pantryList);
     }
 
     //TODO updatePantryItem
@@ -66,18 +69,18 @@ public class PantryController {
     //TODO getPantryPage sends formatted info for the user's pantry page
 
     @GetMapping("/Locations")
-    public List<LocationDto> getLocations(@RequestParam int id) {
-        return pantryPageService.getPantryLocations(id);
+    public List<LocationDto> getLocations(@RequestParam int userId) {
+        return pantryPageService.getPantryLocations(userId);
     }
 
     @GetMapping("/Categories")
-    public List<CategoryDto> getCategories(@RequestParam int id) {
-        return pantryPageService.getPantryCategories(id);
+    public List<CategoryDto> getCategories(@RequestParam int userId) {
+        return pantryPageService.getPantryCategories(userId);
     }
 
     @GetMapping("/Pantry")
-    public List<PantryDto> getPantry(@RequestParam int id) {
-        return pantryPageService.getPantryItems(id);
+    public List<PantryDto> getPantry(@RequestParam int userId) {
+        return pantryPageService.getPantryItems(userId);
     }
 
     @GetMapping("/e")

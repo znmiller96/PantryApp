@@ -11,11 +11,11 @@ import jakarta.annotation.Nullable;
 
 import java.util.Date;
 
-@JsonDeserialize(builder = AddPantryItemRequestBody.Builder.class)
+@JsonDeserialize(builder = PantryItemRequestBody.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AddPantryItemRequestBody {
+public class PantryItemRequestBody {
 
-    private final int id;
+    private final int pantryItemId;
     private final String name;
     private final QuantityLevel quantityLevel;
     private final Boolean favorite;
@@ -32,8 +32,8 @@ public class AddPantryItemRequestBody {
     private final MeasurementDto measurement;
 
 
-    private AddPantryItemRequestBody(Builder builder) {
-        this.id = builder.id;
+    private PantryItemRequestBody(Builder builder) {
+        this.pantryItemId = builder.pantryItemId;
         this.name = builder.name;;
         this.quantityLevel = builder.quantityLevel;
         this.favorite = builder.favorite;
@@ -46,8 +46,8 @@ public class AddPantryItemRequestBody {
         this.measurement = builder.measurement;
     }
 
-    public int getId() {
-        return id;
+    public int getPantryItemId() {
+        return pantryItemId;
     }
 
     public String getName() {
@@ -93,7 +93,7 @@ public class AddPantryItemRequestBody {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int id;
+        private int pantryItemId;
         private String name;
         private QuantityLevel quantityLevel;
         private Boolean favorite;
@@ -105,8 +105,8 @@ public class AddPantryItemRequestBody {
         private Date usedDate;
         private MeasurementDto measurement;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withPantryItemId(int pantryItemId) {
+            this.pantryItemId = pantryItemId;
             return this;
         }
 
@@ -160,8 +160,8 @@ public class AddPantryItemRequestBody {
             return this;
         }
 
-        public AddPantryItemRequestBody build() {
-            return new AddPantryItemRequestBody(this);
+        public PantryItemRequestBody build() {
+            return new PantryItemRequestBody(this);
         }
     }
 }

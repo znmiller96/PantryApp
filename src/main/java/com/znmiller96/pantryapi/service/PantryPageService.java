@@ -2,6 +2,7 @@ package com.znmiller96.pantryapi.service;
 
 import com.znmiller96.pantryapi.model.dao.Category;
 import com.znmiller96.pantryapi.model.dao.Location;
+import com.znmiller96.pantryapi.model.dao.Pantry;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
@@ -14,6 +15,7 @@ import com.znmiller96.pantryapi.util.Utils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component("PantryService")
 public class PantryPageService {
@@ -37,25 +39,30 @@ public class PantryPageService {
 
     //TODO get Pantry page info
 
-    public void addPantryLocation(int userid, List<String> locations) {
+    public void addPantryLocation(int userId, List<String> locations) {
         locationRepository.saveAll(
                 locations.stream()
-                .map(x -> new Location.Builder().withUserid(userid).withLocation(x).build())
-                .toList());
-    }
-
-    public void addPantryCategory(int userid, List<String> categories) {
-        categoryRepository.saveAll(
-                categories.stream()
-                .map(x -> new Category.Builder()
-                        .withUserid(userid)
-                        .withCategory(x)
+                .map(location -> new Location.Builder()
+                        .withUserid(userId)
+                        .withLocation(location)
                         .build())
                 .toList());
     }
 
-    public void addPantryItem(List<PantryDto> pantryDto) {
+    public void addPantryCategory(int userId, List<String> categories) {
+        categoryRepository.saveAll(
+                categories.stream()
+                .map(category -> new Category.Builder()
+                        .withUserid(userId)
+                        .withCategory(category)
+                        .build())
+                .toList());
+    }
 
+    public void addPantryItem(int userId, List<PantryDto> pantryDto) {
+        pantryRepository.saveAll(pantryDto.stream()
+                .map(pantryItem -> Utils.pantryDtoToDaoWithUserId(userId, pantryItem))
+                .toList());
     }
 
     public List<PantryDto> getPantryItems(int userid) {

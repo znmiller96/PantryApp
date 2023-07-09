@@ -30,7 +30,6 @@ public class Pantry {
     //user this item belongs to
     private int userId;
     private String name;
-    //TODO similar to expiration date have display of low amount of item
     private String quantityLevel;
     private Boolean favorite;
     //to store old items to process data to suggest grocery lists?
@@ -45,7 +44,6 @@ public class Pantry {
     @ManyToOne
     private Location location;
 
-    //TODO one to one for expiration date, measurement, used date
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private ExpirationDate expirationDate;

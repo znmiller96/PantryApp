@@ -7,6 +7,9 @@ import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.MeasurementDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.model.dao.Pantry;
+import com.znmiller96.pantryapi.model.request.body.PantryItemRequestBody;
+
+import java.util.Date;
 
 public class Utils {
 
@@ -53,6 +56,78 @@ public class Utils {
         return new CategoryDto.Builder()
                 .withId(category.getId())
                 .withCategory(category.getCategory())
+                .build();
+    }
+
+    public static PantryDto pantryItemRequestBodyToDto(PantryItemRequestBody pantryItemRequestBody) {
+        PantryDto.Builder pantryBuilder = new PantryDto.Builder()
+                .withId(pantryItemRequestBody.getPantryItemId())
+                .withName(pantryItemRequestBody.getName())
+                .withQuantityLevel(pantryItemRequestBody.getQuantityLevel())
+                .withFavorite(pantryItemRequestBody.getFavorite())
+                .withUsed(pantryItemRequestBody.getUsed())
+                .withDayAdded(pantryItemRequestBody.getDayAdded())
+                .withCategory(new CategoryDto.Builder()
+                        .withId(pantryItemRequestBody.getCategory().getId())
+                        .withCategory(pantryItemRequestBody.getCategory().getCategory())
+                        .build())
+                .withLocation(new LocationDto.Builder()
+                        .withId(pantryItemRequestBody.getLocation().getId())
+                        .withLocation(pantryItemRequestBody.getLocation().getLocation())
+                        .build());
+
+        if (pantryItemRequestBody.getExpirationDate() != null) {
+            pantryBuilder.withExpirationDate(pantryItemRequestBody.getExpirationDate());
+        }
+        if (pantryItemRequestBody.getUsedDate() != null) {
+            pantryBuilder.withUsedDate(pantryItemRequestBody.getUsedDate());
+        }
+        if (pantryItemRequestBody.getMeasurement() != null) {
+            pantryBuilder.withMeasurement(pantryItemRequestBody.getMeasurement());
+        }
+
+        return pantryBuilder.build();
+    }
+
+    public static Pantry pantryDtoToDaoWithUserId(int userId, PantryDto pantryDto) {
+        Pantry pantryItem = new Pantry.Builder()
+                .withUserId(userId)
+                .withName(pantryDto.getName())
+                .withQuantityLevel(pantryDto.getQuantityLevel().name())
+                .withFavorite(pantryDto.getFavorite())
+                //if value exist use given value, otherwise use default
+                .withUsed(pantryDto.getUsed() != null ? pantryDto.getUsed() : false)
+                .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
+                .withCategory(categoryDtoToDao(pantryDto.getCategory()))
+                .withLocation(locationDtoToDao(pantryDto.getLocation()))
+                .build();
+
+        if (pantryDto.getExpirationDate() != null) {
+            //TODO Add expiration date
+        }
+
+        if (pantryDto.getUsedDate() != null) {
+            //TODO Add used date
+        }
+
+        if (pantryDto.getMeasurement() != null) {
+            //TODO Add measurement
+        }
+
+        return pantryItem;
+    }
+
+    public static Category categoryDtoToDao(CategoryDto categoryDto) {
+        return new Category.Builder()
+                .withId(categoryDto.getId())
+                .withCategory(categoryDto.getCategory())
+                .build();
+    }
+
+    public static Location locationDtoToDao(LocationDto locationDto) {
+        return new Location.Builder()
+                .withId(locationDto.getId())
+                .withLocation(locationDto.getLocation())
                 .build();
     }
 

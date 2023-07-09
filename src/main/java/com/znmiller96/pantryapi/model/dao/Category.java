@@ -20,7 +20,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Category {
 
-    //TODO change sequence names
     @Id
     @SequenceGenerator(
             name = "category_id_sequence",

@@ -4,19 +4,19 @@ import java.util.List;
 
 public class AddLocationRequestBody {
 
-    private int id;
+    private int userId;
 
     private List<String> locationList;
 
     public AddLocationRequestBody() {
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public List<String> getLocationList() {
@@ -26,4 +26,6 @@ public class AddLocationRequestBody {
     public void setLocationList(List<String> locationList) {
         this.locationList = locationList;
     }
+
+    //TODO builder class
 }

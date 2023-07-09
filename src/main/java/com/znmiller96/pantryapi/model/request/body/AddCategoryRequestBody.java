@@ -4,19 +4,19 @@ import java.util.List;
 
 public class AddCategoryRequestBody {
 
-    private int id;
+    private int userId;
 
     private List<String> categoryList;
 
     public AddCategoryRequestBody() {
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public List<String> getCategoryList() {
@@ -26,4 +26,6 @@ public class AddCategoryRequestBody {
     public void setCategoryList(List<String> categoryList) {
         this.categoryList = categoryList;
     }
+
+    //TODO builder class
 }
