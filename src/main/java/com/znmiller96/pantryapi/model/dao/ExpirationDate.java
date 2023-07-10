@@ -34,7 +34,7 @@ public class ExpirationDate {
     )
     @Column(name = "id")
     private int id;
-    private Date expirationDate;
+    private Date expirationdate;
     @OneToOne
     @JoinColumn(name = "id")
     @MapsId
@@ -45,7 +45,7 @@ public class ExpirationDate {
 
     private ExpirationDate(Builder builder) {
         this.id = builder.id;
-        this.expirationDate = builder.expirationDate;
+        this.expirationdate = builder.expirationDate;
         this.pantry = builder.pantry;
     }
 
@@ -54,7 +54,7 @@ public class ExpirationDate {
     }
 
     public Date getExpirationDate() {
-        return expirationDate;
+        return expirationdate;
     }
 
     public Pantry getPantry() {

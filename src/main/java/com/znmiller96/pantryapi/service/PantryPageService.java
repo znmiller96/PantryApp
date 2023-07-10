@@ -2,7 +2,6 @@ package com.znmiller96.pantryapi.service;
 
 import com.znmiller96.pantryapi.model.dao.Category;
 import com.znmiller96.pantryapi.model.dao.Location;
-import com.znmiller96.pantryapi.model.dao.Pantry;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
@@ -15,7 +14,6 @@ import com.znmiller96.pantryapi.util.Utils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component("PantryService")
 public class PantryPageService {
@@ -66,24 +64,24 @@ public class PantryPageService {
     }
 
     public List<PantryDto> getPantryItems(int userid) {
-        return pantryRepository.findAll()
+        return pantryRepository.findByUserid(userid)
                 .stream().map(Utils::pantryDaoToDto)
                 .toList();
     }
 
     public List<LocationDto> getPantryLocations(int userId) {
-        return locationRepository.findAllByUserid(userId)
+        return locationRepository.findByUserid(userId)
                 .stream().map(Utils::locationDaoToDto)
                 .toList();
     }
 
     public List<CategoryDto> getPantryCategories(int userId) {
-        return categoryRepository.findAllByUserid(userId)
+        return categoryRepository.findByUserid(userId)
                 .stream().map(Utils::categoryDaoToDto)
                 .toList();
     }
 
     public List<ExpirationDate> getExpirationDate(int id) {
-        return expirationDateRepository.findAllById(id);
+        return expirationDateRepository.findById(id);
     }
 }

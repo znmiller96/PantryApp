@@ -1,7 +1,10 @@
 package com.znmiller96.pantryapi.util;
 
 import com.znmiller96.pantryapi.model.dao.Category;
+import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.model.dao.Location;
+import com.znmiller96.pantryapi.model.dao.Measurement;
+import com.znmiller96.pantryapi.model.dao.UsedDate;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.MeasurementDto;
@@ -103,15 +106,31 @@ public class Utils {
                 .build();
 
         if (pantryDto.getExpirationDate() != null) {
-            //TODO Add expiration date
+            ExpirationDate expirationDate = new ExpirationDate.Builder()
+                    .withExpirationDate(pantryDto.getExpirationDate())
+                    .build();
+
+            pantryItem.setExpirationDate(expirationDate);
+            expirationDate.setPantry(pantryItem);
         }
 
         if (pantryDto.getUsedDate() != null) {
-            //TODO Add used date
+            UsedDate usedDate = new UsedDate.Builder()
+                    .withUsedDate(pantryDto.getUsedDate())
+                    .build();
+
+            pantryItem.setUsedDate(usedDate);
+            usedDate.setPantry(pantryItem);
         }
 
         if (pantryDto.getMeasurement() != null) {
-            //TODO Add measurement
+            Measurement measurement = new Measurement.Builder()
+                    .withValue(pantryDto.getMeasurement().getValue())
+                    .withUnit(pantryDto.getMeasurement().getUnit().name())
+                    .build();
+
+            pantryItem.setMeasurement(measurement);
+            measurement.setPantry(pantryItem);
         }
 
         return pantryItem;

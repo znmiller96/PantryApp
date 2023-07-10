@@ -1,11 +1,11 @@
 package com.znmiller96.pantryapi.controller;
 
+import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.model.request.body.AddCategoryRequestBody;
 import com.znmiller96.pantryapi.model.request.body.AddLocationRequestBody;
-import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.model.request.body.PantryItemRequestBody;
 import com.znmiller96.pantryapi.service.PantryPageService;
 import com.znmiller96.pantryapi.util.Utils;
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/pantry")
@@ -30,8 +29,6 @@ public class PantryController {
         this.pantryPageService = pantryPageService;
 
     }
-
-    //TODO addPantryItemList
 
     @PostMapping("/add/location")
     public void addLocation(@RequestBody AddLocationRequestBody addLocationRequestBody) {

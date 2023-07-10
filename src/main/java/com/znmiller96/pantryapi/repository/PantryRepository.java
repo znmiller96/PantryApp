@@ -3,10 +3,12 @@ package com.znmiller96.pantryapi.repository;
 import com.znmiller96.pantryapi.model.dao.Pantry;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface PantryRepository
         extends JpaRepository<Pantry, Integer> {
 
-    //TODO get pantry item by userId
+    List<Pantry> findByUserid(int userid);
 
     //TODO get pantry items by quantity level
 

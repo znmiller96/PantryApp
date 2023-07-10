@@ -28,13 +28,15 @@ public class Pantry {
     )
     private int id;
     //user this item belongs to
-    private int userId;
+
+    //TODO remove capital letters to use built in queries
+    private int userid;
     private String name;
-    private String quantityLevel;
+    private String quantitylevel;
     private Boolean favorite;
     //to store old items to process data to suggest grocery lists?
     private Boolean used;
-    private Date dayAdded;
+    private Date dayadded;
     //expiration date adn used date are in separate table because they can be null
 
 
@@ -46,11 +48,11 @@ public class Pantry {
 
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private ExpirationDate expirationDate;
+    private ExpirationDate expirationdate;
 
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private UsedDate usedDate;
+    private UsedDate useddate;
 
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -60,12 +62,12 @@ public class Pantry {
     public Pantry() {}
 
     public Pantry(Builder builder) {
-        this.userId = builder.userId;
+        this.userid = builder.userId;
         this.name = builder.name;
-        this.quantityLevel = builder.quantityLevel;
+        this.quantitylevel = builder.quantityLevel;
         this.favorite = builder.favorite;
         this.used = builder.used;
-        this.dayAdded = builder.dayAdded;
+        this.dayadded = builder.dayAdded;
         this.category = builder.category;
         this.location = builder.location;
     }
@@ -79,11 +81,11 @@ public class Pantry {
     }
 
     public int getUserId() {
-        return userId;
+        return userid;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.userid = userId;
     }
 
     public String getName() {
@@ -95,11 +97,11 @@ public class Pantry {
     }
 
     public String getQuantityLevel() {
-        return quantityLevel;
+        return quantitylevel;
     }
 
     public void setQuantityLevel(String quantityLevel) {
-        this.quantityLevel = quantityLevel;
+        this.quantitylevel = quantityLevel;
     }
 
     public Boolean getFavorite() {
@@ -119,11 +121,11 @@ public class Pantry {
     }
 
     public Date getDayAdded() {
-        return dayAdded;
+        return dayadded;
     }
 
     public void setDayAdded(Date dayAdded) {
-        this.dayAdded = dayAdded;
+        this.dayadded = dayAdded;
     }
 
     public Category getCategory() {
@@ -143,19 +145,19 @@ public class Pantry {
     }
 
     public ExpirationDate getExpirationDate() {
-        return expirationDate;
+        return expirationdate;
     }
 
     public void setExpirationDate(ExpirationDate expirationDate) {
-        this.expirationDate = expirationDate;
+        this.expirationdate = expirationDate;
     }
 
     public UsedDate getUsedDate() {
-        return usedDate;
+        return useddate;
     }
 
     public void setUsedDate(UsedDate usedDate) {
-        this.usedDate = usedDate;
+        this.useddate = usedDate;
     }
 
     public Measurement getMeasurement() {

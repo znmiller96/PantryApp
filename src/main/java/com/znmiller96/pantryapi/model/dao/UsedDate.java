@@ -34,7 +34,7 @@ public class UsedDate {
     )
     @Column(name = "id")
     private int id;
-    private Date usedDate;
+    private Date useddate;
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -46,7 +46,7 @@ public class UsedDate {
 
     private UsedDate(Builder builder) {
         this.id = builder.id;
-        this.usedDate = builder.usedDate;
+        this.useddate = builder.usedDate;
         this.pantry = builder.pantry;
     }
 
@@ -55,7 +55,7 @@ public class UsedDate {
     }
 
     public Date getUsedDate() {
-        return usedDate;
+        return useddate;
     }
 
     public Pantry getPantry() {
