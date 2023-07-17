@@ -8,6 +8,5 @@ import java.util.List;
 public interface LocationRepository
         extends JpaRepository<Location, Integer> {
 
-    //@Query("SELECT u FROM Location u WHERE u.userid = ?1")
-    List<Location> findByUserid(int userid);
+    List<Location> findByUserId(int userId);
 }

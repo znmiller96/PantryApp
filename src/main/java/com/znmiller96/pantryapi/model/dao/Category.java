@@ -32,7 +32,7 @@ public class Category {
             generator = "category_id_sequence"
     )
     private int id;
-    private int userid;
+    private int userId;
     private String category;
 
     @OneToMany(mappedBy = "category")
@@ -40,7 +40,7 @@ public class Category {
 
     private Category(Builder builder) {
         this.id = builder.id;
-        this.userid = builder.userid;
+        this.userId = builder.userId;
         this.category = builder.category;
         this.pantry = builder.pantry;
     }
@@ -51,8 +51,8 @@ public class Category {
         return id;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
     public String getCategory() {
@@ -63,7 +63,7 @@ public class Category {
     public static class Builder {
 
         private int id;
-        private int userid;
+        private int userId;
         private String category;
         private List<Pantry> pantry;
 
@@ -72,8 +72,8 @@ public class Category {
             return this;
         }
 
-        public Builder withUserid(int userid) {
-            this.userid = userid;
+        public Builder withUserId(int userId) {
+            this.userId = userId;
             return this;
         }
 

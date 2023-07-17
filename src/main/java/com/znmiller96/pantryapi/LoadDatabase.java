@@ -26,28 +26,28 @@ public class LoadDatabase {
                                    PantryRepository pantryRepository) {
         return args -> {
             locationRepository.save(new Location.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withLocation("Fridge")
                     .build());
             locationRepository.save(new Location.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withLocation("Freezer")
                     .build());
             locationRepository.save(new Location.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withLocation("Corner Cabinet")
                     .build());
             locationRepository.save(new Location.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withLocation("Cabinet Left of Microwave")
                     .build());
 
             categoryRepository.save(new Category.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withCategory("Dairy")
                     .build());
             categoryRepository.save(new Category.Builder()
-                    .withUserid(1001)
+                    .withUserId(1001)
                     .withCategory("Baking")
                     .build());
 

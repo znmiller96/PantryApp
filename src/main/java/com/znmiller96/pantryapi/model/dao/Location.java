@@ -28,7 +28,7 @@ public class Location {
     )
     private int id;
 
-    private int userid;
+    private int userId;
     private String location;
 
     @OneToMany(mappedBy = "location")
@@ -36,7 +36,7 @@ public class Location {
 
     public Location(Builder builder) {
         this.id = builder.id;
-        this.userid = builder.userid;
+        this.userId = builder.userId;
         this.location = builder.location;
         this.pantry = builder.pantry;
     }
@@ -47,8 +47,8 @@ public class Location {
         return id;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
     public String getLocation() {
@@ -58,13 +58,13 @@ public class Location {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int userid;
+        private int userId;
         private String location;
         private int id;
         private List<Pantry> pantry;
 
-        public Builder withUserid(int userid) {
-            this.userid = userid;
+        public Builder withUserId(int userId) {
+            this.userId = userId;
             return this;
         }
 

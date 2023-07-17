@@ -1,61 +1,26 @@
 package com.znmiller96.pantryapi.service;
 
-import com.znmiller96.pantryapi.model.dao.Category;
-import com.znmiller96.pantryapi.model.dao.Location;
-import com.znmiller96.pantryapi.model.dto.CategoryDto;
-import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
-import com.znmiller96.pantryapi.model.dao.ExpirationDate;
-import com.znmiller96.pantryapi.repository.CategoryRepository;
-import com.znmiller96.pantryapi.repository.ExpirationDateRepository;
-import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
+import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 @Component("PantryService")
 public class PantryPageService {
 
     private final PantryRepository pantryRepository;
-    private final LocationRepository locationRepository;
-    private final CategoryRepository categoryRepository;
-    private final ExpirationDateRepository expirationDateRepository;
 
     public PantryPageService(
-            PantryRepository pantryRepository,
-            LocationRepository locationRepository,
-            CategoryRepository categoryRepository,
-            ExpirationDateRepository expirationDateRepository) {
+            PantryRepository pantryRepository) {
         this.pantryRepository = pantryRepository;
-        this.locationRepository = locationRepository;
-        this.categoryRepository = categoryRepository;
-        this.expirationDateRepository = expirationDateRepository;
     }
 
 
     //TODO get Pantry page info
-
-    public void addPantryLocation(int userId, List<String> locations) {
-        locationRepository.saveAll(
-                locations.stream()
-                .map(location -> new Location.Builder()
-                        .withUserid(userId)
-                        .withLocation(location)
-                        .build())
-                .toList());
-    }
-
-    public void addPantryCategory(int userId, List<String> categories) {
-        categoryRepository.saveAll(
-                categories.stream()
-                .map(category -> new Category.Builder()
-                        .withUserid(userId)
-                        .withCategory(category)
-                        .build())
-                .toList());
-    }
 
     public void addPantryItem(int userId, List<PantryDto> pantryDto) {
         pantryRepository.saveAll(pantryDto.stream()
@@ -64,24 +29,20 @@ public class PantryPageService {
     }
 
     public List<PantryDto> getPantryItems(int userid) {
-        return pantryRepository.findByUserid(userid)
+        return pantryRepository.findByUserId(userid)
                 .stream().map(Utils::pantryDaoToDto)
                 .toList();
     }
 
-    public List<LocationDto> getPantryLocations(int userId) {
-        return locationRepository.findByUserid(userId)
-                .stream().map(Utils::locationDaoToDto)
+    public List<PantryDto> getPantryItemsByQuantityLevels(int userid, QuantityLevel quantityLevel) {
+        return pantryRepository.findByUserIdAndAndQuantityLevelEqualsIgnoreCase(userid, quantityLevel.name())
+                .stream().map(Utils::pantryDaoToDto)
                 .toList();
     }
 
-    public List<CategoryDto> getPantryCategories(int userId) {
-        return categoryRepository.findByUserid(userId)
-                .stream().map(Utils::categoryDaoToDto)
+    public List<PantryDto> getPantryItemsByExpirationDate(int userid, Date expirationDate) {
+        return pantryRepository.findByUserIdAndAndExpirationDate_ExpirationDateBefore(userid, expirationDate)
+                .stream().map(Utils::pantryDaoToDto)
                 .toList();
-    }
-
-    public List<ExpirationDate> getExpirationDate(int id) {
-        return expirationDateRepository.findById(id);
     }
 }
