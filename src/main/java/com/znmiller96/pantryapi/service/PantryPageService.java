@@ -4,21 +4,17 @@ import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.repository.PantryRepository;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
+@AllArgsConstructor
 @Component("PantryService")
 public class PantryPageService {
 
     private final PantryRepository pantryRepository;
-
-    public PantryPageService(
-            PantryRepository pantryRepository) {
-        this.pantryRepository = pantryRepository;
-    }
-
 
     //TODO get Pantry page info
 

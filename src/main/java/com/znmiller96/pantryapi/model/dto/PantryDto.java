@@ -1,5 +1,6 @@
 package com.znmiller96.pantryapi.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
@@ -17,13 +18,16 @@ public class PantryDto {
     private final QuantityLevel quantityLevel;
     private final Boolean favorite;
     private final Boolean used;
+    @JsonFormat(pattern="yyyy-MM-dd")
     private final Date dayAdded;
     //type could be categories like spices, pasta, rice, bread, etc...
     private final CategoryDto category;
     private final LocationDto location;
     @Nullable
+    @JsonFormat(pattern="yyyy-MM-dd")
     private final Date expirationDate;
     @Nullable
+    @JsonFormat(pattern="yyyy-MM-dd")
     private final Date usedDate;
     @Nullable
     private final MeasurementDto measurement;

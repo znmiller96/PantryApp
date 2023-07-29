@@ -4,18 +4,16 @@ import com.znmiller96.pantryapi.model.dao.Location;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.repository.LocationRepository;
 import com.znmiller96.pantryapi.util.Utils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Component("LocationService")
 public class LocationService {
 
     private final LocationRepository locationRepository;
-
-    public LocationService(LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;
-    }
 
     public void addLocation(int userId, List<String> locations) {
         locationRepository.saveAll(

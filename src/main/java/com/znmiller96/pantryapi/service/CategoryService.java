@@ -4,18 +4,16 @@ import com.znmiller96.pantryapi.model.dao.Category;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.repository.CategoryRepository;
 import com.znmiller96.pantryapi.util.Utils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Component("CategoryService")
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
-
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
 
     public void addCategory(int userId, List<String> categories) {
         categoryRepository.saveAll(

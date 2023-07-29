@@ -3,6 +3,7 @@ package com.znmiller96.pantryapi.controller;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.request.body.AddCategoryRequestBody;
 import com.znmiller96.pantryapi.service.CategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,14 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("api/v1/category")
 public class CategoryController {
 
     private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
+//    public CategoryController(CategoryService categoryService) {
+//        this.categoryService = categoryService;
+//    }
 
     //TODO update and delete
 
