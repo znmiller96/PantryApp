@@ -1,5 +1,19 @@
 # Pantry Api
 
+# TODO List
+
+### Convert Category and Location to file database like elastic
+
+- this is because there will only be one list per user
+- it could be a single setting file that will contain preferences, categories, and locations
+
+### Add table to track how an item got used up
+
+- ex. expired, ate everything, error, etc
+- this could be used for suggestions of how much to get for future
+- if item is thrown out for being expired a lot then could give a suggestion of buying less on next grocery trip
+- error removals can be used to track if there are a trend of items added incorrectly
+
 # Docker
 
 ### Postgres
@@ -20,7 +34,9 @@ TODO add link to postman collection
 
 These code snippets belong in pre-request script
 
-`pm.environment.set('variableName', 'value');` this is how to set variables in
+`pm.environment.set('variableName', 'value');` how to set variables in
+
+`"{{variableName}}"` how you call the variable in request body
 
 ```
 var moment = require('moment')
@@ -32,7 +48,8 @@ date variables with varying dates
 
 
 # Spring Boot Annotations
-`@AllArgsConstructor` generates a constructor for dependency injection
+`@AllArgsConstructor` generates a constructor of all class variables for dependency injection
+(ex. `PantryController`)
 
 `@JsonFormat(pattern="yyyy-MM-dd")` sets format the date will be set at when converted to json sting
 
@@ -44,7 +61,7 @@ date variables with varying dates
 
 `@JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")` sets the name of method that creates class and prefix of set methods in builder class for deserialization
 
-`@Id` assign variable as primary key in table
+`@Id` assign variable as primary key in table (ex. `Pantry`)
 
 ```
 @SequenceGenerator(

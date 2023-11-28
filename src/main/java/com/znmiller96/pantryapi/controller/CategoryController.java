@@ -4,6 +4,7 @@ import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.request.body.AddCategoryRequestBody;
 import com.znmiller96.pantryapi.service.CategoryService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,6 @@ import java.util.List;
 public class CategoryController {
 
     private final CategoryService categoryService;
-
-//    public CategoryController(CategoryService categoryService) {
-//        this.categoryService = categoryService;
-//    }
 
     //TODO update and delete
 

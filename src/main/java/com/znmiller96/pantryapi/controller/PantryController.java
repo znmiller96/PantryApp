@@ -1,8 +1,10 @@
 package com.znmiller96.pantryapi.controller;
 
 import com.znmiller96.pantryapi.model.dto.PantryDto;
+import com.znmiller96.pantryapi.model.dto.PantryMainPageDto;
 import com.znmiller96.pantryapi.model.request.body.PantryItemRequestBody;
 import com.znmiller96.pantryapi.service.PantryPageService;
+import com.znmiller96.pantryapi.util.MeasurementUnit;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
 import lombok.AllArgsConstructor;
@@ -32,14 +34,16 @@ public class PantryController {
     }
 
     //TODO updatePantryItem
-
-    //TODO updatePantryItemList
-
-    //TODO deletePantryItem
-
-    //TODO deletePantryItemList
+    @PostMapping("/update/pantryItem")
+    public void updatePantryItem(@RequestParam int userId, @RequestBody PantryItemRequestBody pantryItemRequestBody) {
+        PantryDto pantryDto = Utils.pantryItemRequestBodyToDto(pantryItemRequestBody);
+    }
 
     //TODO getPantryPage sends formatted info for the user's pantry page
+    @GetMapping("/Pantry/MainPage")
+    public PantryMainPageDto getPantryMainPage(@RequestParam int userId) {
+        return pantryPageService.getPantryMainPage(userId);
+    }
 
     @GetMapping("/Pantry")
     public List<PantryDto> getPantry(@RequestParam int userId) {
@@ -56,4 +60,6 @@ public class PantryController {
         Date formattedExpirationDate =new SimpleDateFormat("yyyy-MM-dd").parse(expirationDate);
         return pantryPageService.getPantryItemsByExpirationDate(userId, formattedExpirationDate);
     }
+
+    //TODO Create endpoint to send list of MeasurementUnit enum
 }

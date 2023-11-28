@@ -14,6 +14,6 @@ public enum MeasurementUnit {
     PINT,
     QUART,
     GALLON,
-    SERVING
-
+    SERVING,
+    QTY
 }

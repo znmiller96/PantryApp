@@ -11,8 +11,10 @@ public interface PantryRepository
 
     List<Pantry> findByUserId(int userId);
 
-    List<Pantry> findByUserIdAndAndQuantityLevelEqualsIgnoreCase(int userId, String quantityLevel);
+    List<Pantry> findByUserIdAndQuantityLevelEqualsIgnoreCase(int userId, String quantityLevel);
 
     //The _ is used to annotate use column in ExpirationDate table
-    List<Pantry> findByUserIdAndAndExpirationDate_ExpirationDateBefore(int userId, Date expirationDate);
+    List<Pantry> findByUserIdAndExpirationDate_ExpirationDateBefore(int userId, Date expirationDate);
+
+    List<Pantry> findByUserIdAndUsedFalse(int UserId);
 }
