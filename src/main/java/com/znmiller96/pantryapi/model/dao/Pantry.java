@@ -26,7 +26,7 @@ public class Pantry {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    private int id;
+    private int pantryItemId;
     //user this item belongs to
 
     //TODO remove capital letters to use built in queries
@@ -62,6 +62,7 @@ public class Pantry {
     public Pantry() {}
 
     public Pantry(Builder builder) {
+        this.pantryItemId = builder.pantryItemId;
         this.userId = builder.userId;
         this.name = builder.name;
         this.quantityLevel = builder.quantityLevel;
@@ -72,12 +73,12 @@ public class Pantry {
         this.location = builder.location;
     }
 
-    public int getId() {
-        return id;
+    public int getPantryItemId() {
+        return pantryItemId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPantryItemId(int id) {
+        this.pantryItemId = id;
     }
 
     public int getUserId() {
@@ -170,6 +171,7 @@ public class Pantry {
 
     public static class Builder {
 
+        private int pantryItemId;
         private int userId;
         private String name;
         private String quantityLevel;
@@ -178,6 +180,11 @@ public class Pantry {
         private Date dayAdded;
         private Category category;
         private Location location;
+
+        public Builder withPantryItemId(int pantryItemId) {
+            this.pantryItemId = pantryItemId;
+            return this;
+        }
 
         public Builder withUserId(int userId) {
             this.userId = userId;

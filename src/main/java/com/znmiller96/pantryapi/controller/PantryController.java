@@ -4,7 +4,6 @@ import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.model.dto.PantryMainPageDto;
 import com.znmiller96.pantryapi.model.request.body.PantryItemRequestBody;
 import com.znmiller96.pantryapi.service.PantryPageService;
-import com.znmiller96.pantryapi.util.MeasurementUnit;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
 import lombok.AllArgsConstructor;
@@ -37,6 +36,7 @@ public class PantryController {
     @PostMapping("/update/pantryItem")
     public void updatePantryItem(@RequestParam int userId, @RequestBody PantryItemRequestBody pantryItemRequestBody) {
         PantryDto pantryDto = Utils.pantryItemRequestBodyToDto(pantryItemRequestBody);
+        pantryPageService.updatePantryItem(userId, pantryDto);
     }
 
     //TODO getPantryPage sends formatted info for the user's pantry page

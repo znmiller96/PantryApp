@@ -8,16 +8,16 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LocationDto {
 
-    private final int id;
+    private final int locationId;
     private final String location;
 
     private LocationDto(Builder builder) {
-        this.id = builder.id;
+        this.locationId = builder.locationId;
         this.location = builder.location;
     }
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
     public String getLocation() {
@@ -27,11 +27,11 @@ public class LocationDto {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int id;
+        private int locationId;
         private String location;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withLocationId(int locationId) {
+            this.locationId = locationId;
             return this;
         }
 

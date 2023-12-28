@@ -26,7 +26,7 @@ public class Location {
             strategy = GenerationType.SEQUENCE,
             generator = "location_id_sequence"
     )
-    private int id;
+    private int locationId;
 
     private int userId;
     private String location;
@@ -35,7 +35,7 @@ public class Location {
     private List<Pantry> pantry;
 
     public Location(Builder builder) {
-        this.id = builder.id;
+        this.locationId = builder.locationId;
         this.userId = builder.userId;
         this.location = builder.location;
         this.pantry = builder.pantry;
@@ -43,8 +43,8 @@ public class Location {
 
     public Location() {}
 
-    public int getId() {
-        return id;
+    public int getLocationId() {
+        return locationId;
     }
 
     public int getUserId() {
@@ -60,7 +60,7 @@ public class Location {
 
         private int userId;
         private String location;
-        private int id;
+        private int locationId;
         private List<Pantry> pantry;
 
         public Builder withUserId(int userId) {
@@ -73,8 +73,8 @@ public class Location {
             return this;
         }
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withLocationId(int locationId) {
+            this.locationId = locationId;
             return this;
         }
 

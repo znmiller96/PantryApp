@@ -8,16 +8,16 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoryDto {
 
-    private final int id;
+    private final int categoryId;
     private final String category;
 
     private CategoryDto(Builder builder) {
-        this.id = builder.id;
+        this.categoryId = builder.categoryId;
         this.category = builder.category;
     }
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     public String getCategory() {
@@ -27,11 +27,11 @@ public class CategoryDto {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int id;
+        private int categoryId;
         private String category;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withCategoryId(int categoryId) {
+            this.categoryId = categoryId;
             return this;
         }
 

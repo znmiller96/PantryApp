@@ -18,18 +18,18 @@ public class Utils {
 
     public static PantryDto pantryDaoToDto(Pantry pantry) {
         PantryDto.Builder pantryBuilder = new PantryDto.Builder()
-                .withId(pantry.getId())
+                .withPantryItemId(pantry.getPantryItemId())
                 .withName(pantry.getName())
                 .withQuantityLevel(QuantityLevel.valueOf(pantry.getQuantityLevel()))
                 .withFavorite(pantry.getFavorite())
                 .withUsed(pantry.getUsed())
                 .withDayAdded(pantry.getDayAdded())
                 .withCategory(new CategoryDto.Builder()
-                        .withId(pantry.getCategory().getId())
+                        .withCategoryId(pantry.getCategory().getCategoryId())
                         .withCategory(pantry.getCategory().getCategory())
                         .build())
                 .withLocation(new LocationDto.Builder()
-                        .withId(pantry.getLocation().getId())
+                        .withLocationId(pantry.getLocation().getLocationId())
                         .withLocation(pantry.getLocation().getLocation())
                         .build());
 
@@ -50,32 +50,32 @@ public class Utils {
     }
     public static LocationDto locationDaoToDto(Location location) {
         return new LocationDto.Builder()
-                .withId(location.getId())
+                .withLocationId(location.getLocationId())
                 .withLocation(location.getLocation())
                 .build();
     }
 
     public static CategoryDto categoryDaoToDto(Category category) {
         return new CategoryDto.Builder()
-                .withId(category.getId())
+                .withCategoryId(category.getCategoryId())
                 .withCategory(category.getCategory())
                 .build();
     }
 
     public static PantryDto pantryItemRequestBodyToDto(PantryItemRequestBody pantryItemRequestBody) {
         PantryDto.Builder pantryBuilder = new PantryDto.Builder()
-                .withId(pantryItemRequestBody.getPantryItemId())
+                .withPantryItemId(pantryItemRequestBody.getPantryItemId())
                 .withName(pantryItemRequestBody.getName())
                 .withQuantityLevel(pantryItemRequestBody.getQuantityLevel())
                 .withFavorite(pantryItemRequestBody.getFavorite())
                 .withUsed(pantryItemRequestBody.getUsed())
                 .withDayAdded(pantryItemRequestBody.getDayAdded())
                 .withCategory(new CategoryDto.Builder()
-                        .withId(pantryItemRequestBody.getCategory().getId())
+                        .withCategoryId(pantryItemRequestBody.getCategory().getCategoryId())
                         .withCategory(pantryItemRequestBody.getCategory().getCategory())
                         .build())
                 .withLocation(new LocationDto.Builder()
-                        .withId(pantryItemRequestBody.getLocation().getId())
+                        .withLocationId(pantryItemRequestBody.getLocation().getLocationId())
                         .withLocation(pantryItemRequestBody.getLocation().getLocation())
                         .build());
 
@@ -92,7 +92,7 @@ public class Utils {
         return pantryBuilder.build();
     }
 
-    public static Pantry pantryDtoToDaoWithUserId(int userId, PantryDto pantryDto) {
+    public static Pantry pantryDtoToDaoWithoutItemId(int userId, PantryDto pantryDto) {
         Pantry pantryItem = new Pantry.Builder()
                 .withUserId(userId)
                 .withName(pantryDto.getName())
@@ -136,20 +136,59 @@ public class Utils {
         return pantryItem;
     }
 
+    public static Pantry pantryDtoToDaoWithoutExpDateMeasurementUsedDate(int userId, PantryDto pantryDto) {
+
+        return new Pantry.Builder()
+                .withPantryItemId(pantryDto.getPantryItemId())
+                .withUserId(userId)
+                .withName(pantryDto.getName())
+                .withQuantityLevel(pantryDto.getQuantityLevel().name())
+                .withFavorite(pantryDto.getFavorite())
+                //if value exist use given value, otherwise use default
+                .withUsed(pantryDto.getUsed() != null ? pantryDto.getUsed() : false)
+                .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
+                .withCategory(categoryDtoToDao(pantryDto.getCategory()))
+                .withLocation(locationDtoToDao(pantryDto.getLocation()))
+                .build();
+    }
+
+    public static ExpirationDate pantryDtoToExpirationDateDaoWithoutPantry(PantryDto pantryDto) {
+
+        return new ExpirationDate.Builder()
+                .withPantryItemId(pantryDto.getPantryItemId())
+                .withExpirationDate(pantryDto.getExpirationDate())
+                .build();
+    }
+
+    public static UsedDate pantryDtoToUsedDateDaoWithoutPantry(PantryDto pantryDto) {
+
+        return new UsedDate.Builder()
+                .withPantryItemId(pantryDto.getPantryItemId())
+                .withUsedDate(pantryDto.getUsedDate())
+                .build();
+    }
+
+    public static Measurement pantryDtoToMeasurementDaoWithoutPantry(PantryDto pantryDto) {
+
+        return new Measurement.Builder()
+                .withPantryItemId(pantryDto.getPantryItemId())
+                .withValue(pantryDto.getMeasurement().getValue())
+                .withUnit(pantryDto.getMeasurement().getUnit().name())
+                .build();
+    }
+
     public static Category categoryDtoToDao(CategoryDto categoryDto) {
         return new Category.Builder()
-                .withId(categoryDto.getId())
+                .withCategoryId(categoryDto.getCategoryId())
                 .withCategory(categoryDto.getCategory())
                 .build();
     }
 
     public static Location locationDtoToDao(LocationDto locationDto) {
         return new Location.Builder()
-                .withId(locationDto.getId())
+                .withLocationId(locationDto.getLocationId())
                 .withLocation(locationDto.getLocation())
                 .build();
     }
-
-    //TODO Dto To Dao methods
 
 }

@@ -27,7 +27,7 @@ list tables: `\dt`
 
 # Dev Notes
 - when creating a one to one connection need to make sure to convert to DTO object because if you convert to json will have infinite loop from connecting objects
-
+- never name variable id, always add prefix to describe id
 ### Postman
 
 TODO add link to postman collection
@@ -47,7 +47,21 @@ pm.environment.set('weekPastDate', moment().subtract(7,'day').format(("YYYY-MM-D
 date variables with varying dates
 
 
-# Spring Boot Annotations
+# Spring Boot
+
+## Notes
+
+## Application.yml
+
+`spring.jpa.hibernate.ddl-auto` this determines what happens to table on launch 
+- options are: none, validate, update, create-drop
+- `none`: The default for MySQL. No change is made to the database structure.
+- `update`: Hibernate changes the database according to the given entity structures.
+- `validate`: Hibernate checks the database according to the given entity structures.
+- `create`: Creates the database every time but does not drop it on close.
+- `create-drop`: Creates the database and drops it when SessionFactory closes.
+
+## Annotations
 `@AllArgsConstructor` generates a constructor of all class variables for dependency injection
 (ex. `PantryController`)
 

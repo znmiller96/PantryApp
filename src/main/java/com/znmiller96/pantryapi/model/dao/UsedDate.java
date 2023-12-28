@@ -32,12 +32,12 @@ public class UsedDate {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    @Column(name = "id")
-    private int id;
+    @Column(name = "pantryItemId")
+    private int pantryItemId;
     private Date useddate;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "pantryItemId")
     @MapsId
     private Pantry pantry;
 
@@ -45,13 +45,13 @@ public class UsedDate {
     }
 
     private UsedDate(Builder builder) {
-        this.id = builder.id;
+        this.pantryItemId = builder.pantryItemId;
         this.useddate = builder.usedDate;
         this.pantry = builder.pantry;
     }
 
-    public int getId() {
-        return id;
+    public int getPantryItemId() {
+        return pantryItemId;
     }
 
     public Date getUsedDate() {
@@ -70,7 +70,7 @@ public class UsedDate {
     public static class Builder {
 
         private Date usedDate;
-        private int id;
+        private int pantryItemId;
         private Pantry pantry;
 
         public Builder withUsedDate(Date usedDate) {
@@ -78,8 +78,8 @@ public class UsedDate {
             return this;
         }
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withPantryItemId(int pantryItemId) {
+            this.pantryItemId = pantryItemId;
             return this;
         }
 

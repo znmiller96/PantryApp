@@ -32,11 +32,11 @@ public class ExpirationDate {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    @Column(name = "id")
-    private int id;
+    @Column(name = "pantryItemId")
+    private int pantryItemId;
     private Date expirationDate;
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "pantryItemId")
     @MapsId
     private Pantry pantry;
 
@@ -44,13 +44,13 @@ public class ExpirationDate {
     }
 
     private ExpirationDate(Builder builder) {
-        this.id = builder.id;
+        this.pantryItemId = builder.pantryItemId;
         this.expirationDate = builder.expirationDate;
         this.pantry = builder.pantry;
     }
 
-    public int getId() {
-        return id;
+    public int getPantryItemId() {
+        return pantryItemId;
     }
 
     public Date getExpirationDate() {
@@ -70,7 +70,7 @@ public class ExpirationDate {
     public static class Builder {
 
         private Date expirationDate;
-        private int id;
+        private int pantryItemId;
         private Pantry pantry;
 
         public Builder withExpirationDate(Date expirationDate) {
@@ -78,8 +78,8 @@ public class ExpirationDate {
             return this;
         }
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withPantryItemId(int pantryItemId) {
+            this.pantryItemId = pantryItemId;
             return this;
         }
 

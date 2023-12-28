@@ -31,7 +31,7 @@ public class Category {
             strategy = GenerationType.SEQUENCE,
             generator = "category_id_sequence"
     )
-    private int id;
+    private int categoryId;
     private int userId;
     private String category;
 
@@ -39,7 +39,7 @@ public class Category {
     private List<Pantry> pantry;
 
     private Category(Builder builder) {
-        this.id = builder.id;
+        this.categoryId = builder.categoryId;
         this.userId = builder.userId;
         this.category = builder.category;
         this.pantry = builder.pantry;
@@ -47,8 +47,8 @@ public class Category {
 
     public Category() {}
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     public int getUserId() {
@@ -62,13 +62,13 @@ public class Category {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int id;
+        private int categoryId;
         private int userId;
         private String category;
         private List<Pantry> pantry;
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withCategoryId(int categoryId) {
+            this.categoryId = categoryId;
             return this;
         }
 

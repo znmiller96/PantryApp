@@ -30,13 +30,13 @@ public class Measurement {
             strategy = GenerationType.SEQUENCE,
             generator = "pantry_id_sequence"
     )
-    @Column(name = "id")
-    private int id;
+    @Column(name = "pantryItemId")
+    private int pantryItemId;
     private float value;
     private String unit;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "pantryItemId")
     @MapsId
     private Pantry pantry;
 
@@ -44,14 +44,14 @@ public class Measurement {
     }
 
     private Measurement(Builder builder) {
-        this.id = builder.id;
+        this.pantryItemId = builder.pantryItemId;
         this.value = builder.value;
         this.unit = builder.unit;
         this.pantry = builder.pantry;
     }
 
-    public int getId() {
-        return id;
+    public int getPantryItemId() {
+        return pantryItemId;
     }
 
     public float getValue() {
@@ -75,7 +75,7 @@ public class Measurement {
 
         private float value;
         private String unit;
-        private int id;
+        private int pantryItemId;
         private Pantry pantry;
 
         public Builder withValue(float value) {
@@ -88,8 +88,8 @@ public class Measurement {
             return this;
         }
 
-        public Builder withId(int id) {
-            this.id = id;
+        public Builder withPantryItemId(int pantryItemId) {
+            this.pantryItemId = pantryItemId;
             return this;
         }
 
