@@ -27,20 +27,11 @@ public class Pantry {
             generator = "pantry_id_sequence"
     )
     private int pantryItemId;
-    //user this item belongs to
-
-    //TODO remove capital letters to use built in queries
     private int userId;
     private String name;
     private String quantityLevel;
     private Boolean favorite;
-    //to store old items to process data to suggest grocery lists?
-    private Boolean used;
     private Date dayAdded;
-    //expiration date adn used date are in separate table because they can be null
-
-
-    //type could be categories like spices, pasta, rice, bread, etc...
     @ManyToOne
     private Category category;
     @ManyToOne
@@ -49,10 +40,6 @@ public class Pantry {
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private ExpirationDate expirationDate;
-
-    @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private UsedDate usedDate;
 
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -67,7 +54,6 @@ public class Pantry {
         this.name = builder.name;
         this.quantityLevel = builder.quantityLevel;
         this.favorite = builder.favorite;
-        this.used = builder.used;
         this.dayAdded = builder.dayAdded;
         this.category = builder.category;
         this.location = builder.location;
@@ -113,14 +99,6 @@ public class Pantry {
         this.favorite = favorite;
     }
 
-    public Boolean getUsed() {
-        return used;
-    }
-
-    public void setUsed(Boolean used) {
-        this.used = used;
-    }
-
     public Date getDayAdded() {
         return dayAdded;
     }
@@ -153,14 +131,6 @@ public class Pantry {
         this.expirationDate = expirationDate;
     }
 
-    public UsedDate getUsedDate() {
-        return usedDate;
-    }
-
-    public void setUsedDate(UsedDate usedDate) {
-        this.usedDate = usedDate;
-    }
-
     public Measurement getMeasurement() {
         return measurement;
     }
@@ -176,7 +146,6 @@ public class Pantry {
         private String name;
         private String quantityLevel;
         private Boolean favorite;
-        private Boolean used;
         private Date dayAdded;
         private Category category;
         private Location location;
@@ -203,11 +172,6 @@ public class Pantry {
 
         public Builder withFavorite(Boolean favorite) {
             this.favorite = favorite;
-            return this;
-        }
-
-        public Builder withUsed(Boolean used) {
-            this.used = used;
             return this;
         }
 

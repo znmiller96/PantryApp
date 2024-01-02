@@ -19,15 +19,12 @@ public class PantryItemRequestBody {
     private final String name;
     private final QuantityLevel quantityLevel;
     private final Boolean favorite;
-    private final Boolean used;
     private final Date dayAdded;
     //type could be categories like spices, pasta, rice, bread, etc...
     private final CategoryDto category;
     private final LocationDto location;
     @Nullable
     private final Date expirationDate;
-    @Nullable
-    private final Date usedDate;
     @Nullable
     private final MeasurementDto measurement;
 
@@ -37,12 +34,10 @@ public class PantryItemRequestBody {
         this.name = builder.name;;
         this.quantityLevel = builder.quantityLevel;
         this.favorite = builder.favorite;
-        this.used = builder.used;
         this.dayAdded = builder.dayAdded;
         this.category = builder.category;
         this.location = builder.location;
         this.expirationDate = builder.expirationDate;
-        this.usedDate = builder.usedDate;
         this.measurement = builder.measurement;
     }
 
@@ -62,10 +57,6 @@ public class PantryItemRequestBody {
         return favorite;
     }
 
-    public Boolean getUsed() {
-        return used;
-    }
-
     public Date getDayAdded() {
         return dayAdded;
     }
@@ -82,10 +73,6 @@ public class PantryItemRequestBody {
         return expirationDate;
     }
 
-    public Date getUsedDate() {
-        return usedDate;
-    }
-
     public MeasurementDto getMeasurement() {
         return measurement;
     }
@@ -97,12 +84,10 @@ public class PantryItemRequestBody {
         private String name;
         private QuantityLevel quantityLevel;
         private Boolean favorite;
-        private Boolean used;
         private Date dayAdded;
         private CategoryDto category;
         private LocationDto location;
         private Date expirationDate;
-        private Date usedDate;
         private MeasurementDto measurement;
 
         public Builder withPantryItemId(int pantryItemId) {
@@ -125,11 +110,6 @@ public class PantryItemRequestBody {
             return this;
         }
 
-        public Builder withUsed(Boolean used) {
-            this.used = used;
-            return this;
-        }
-
         public Builder withDayAdded(Date dayAdded) {
             this.dayAdded = dayAdded;
             return this;
@@ -147,11 +127,6 @@ public class PantryItemRequestBody {
 
         public Builder withExpirationDate(Date expirationDate) {
             this.expirationDate = expirationDate;
-            return this;
-        }
-
-        public Builder withUsedDate(Date usedDate) {
-            this.usedDate = usedDate;
             return this;
         }
 

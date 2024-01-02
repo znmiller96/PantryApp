@@ -4,7 +4,6 @@ import com.znmiller96.pantryapi.model.dao.Category;
 import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.model.dao.Location;
 import com.znmiller96.pantryapi.model.dao.Measurement;
-import com.znmiller96.pantryapi.model.dao.UsedDate;
 import com.znmiller96.pantryapi.model.dto.CategoryDto;
 import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.MeasurementDto;
@@ -22,7 +21,6 @@ public class Utils {
                 .withName(pantry.getName())
                 .withQuantityLevel(QuantityLevel.valueOf(pantry.getQuantityLevel()))
                 .withFavorite(pantry.getFavorite())
-                .withUsed(pantry.getUsed())
                 .withDayAdded(pantry.getDayAdded())
                 .withCategory(new CategoryDto.Builder()
                         .withCategoryId(pantry.getCategory().getCategoryId())
@@ -35,9 +33,6 @@ public class Utils {
 
         if (pantry.getExpirationDate() != null) {
             pantryBuilder.withExpirationDate(pantry.getExpirationDate().getExpirationDate());
-        }
-        if (pantry.getUsedDate() != null) {
-            pantryBuilder.withUsedDate(pantry.getUsedDate().getUsedDate());
         }
         if (pantry.getMeasurement() != null) {
             pantryBuilder.withMeasurement(new MeasurementDto.Builder()
@@ -68,7 +63,6 @@ public class Utils {
                 .withName(pantryItemRequestBody.getName())
                 .withQuantityLevel(pantryItemRequestBody.getQuantityLevel())
                 .withFavorite(pantryItemRequestBody.getFavorite())
-                .withUsed(pantryItemRequestBody.getUsed())
                 .withDayAdded(pantryItemRequestBody.getDayAdded())
                 .withCategory(new CategoryDto.Builder()
                         .withCategoryId(pantryItemRequestBody.getCategory().getCategoryId())
@@ -81,9 +75,6 @@ public class Utils {
 
         if (pantryItemRequestBody.getExpirationDate() != null) {
             pantryBuilder.withExpirationDate(pantryItemRequestBody.getExpirationDate());
-        }
-        if (pantryItemRequestBody.getUsedDate() != null) {
-            pantryBuilder.withUsedDate(pantryItemRequestBody.getUsedDate());
         }
         if (pantryItemRequestBody.getMeasurement() != null) {
             pantryBuilder.withMeasurement(pantryItemRequestBody.getMeasurement());
@@ -98,8 +89,6 @@ public class Utils {
                 .withName(pantryDto.getName())
                 .withQuantityLevel(pantryDto.getQuantityLevel().name())
                 .withFavorite(pantryDto.getFavorite())
-                //if value exist use given value, otherwise use default
-                .withUsed(pantryDto.getUsed() != null ? pantryDto.getUsed() : false)
                 .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
                 .withCategory(categoryDtoToDao(pantryDto.getCategory()))
                 .withLocation(locationDtoToDao(pantryDto.getLocation()))
@@ -112,15 +101,6 @@ public class Utils {
 
             pantryItem.setExpirationDate(expirationDate);
             expirationDate.setPantry(pantryItem);
-        }
-
-        if (pantryDto.getUsedDate() != null) {
-            UsedDate usedDate = new UsedDate.Builder()
-                    .withUsedDate(pantryDto.getUsedDate())
-                    .build();
-
-            pantryItem.setUsedDate(usedDate);
-            usedDate.setPantry(pantryItem);
         }
 
         if (pantryDto.getMeasurement() != null) {
@@ -136,7 +116,7 @@ public class Utils {
         return pantryItem;
     }
 
-    public static Pantry pantryDtoToDaoWithoutExpDateMeasurementUsedDate(int userId, PantryDto pantryDto) {
+    public static Pantry pantryDtoToDaoWithoutExpDateMeasurement(int userId, PantryDto pantryDto) {
 
         return new Pantry.Builder()
                 .withPantryItemId(pantryDto.getPantryItemId())
@@ -144,8 +124,6 @@ public class Utils {
                 .withName(pantryDto.getName())
                 .withQuantityLevel(pantryDto.getQuantityLevel().name())
                 .withFavorite(pantryDto.getFavorite())
-                //if value exist use given value, otherwise use default
-                .withUsed(pantryDto.getUsed() != null ? pantryDto.getUsed() : false)
                 .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
                 .withCategory(categoryDtoToDao(pantryDto.getCategory()))
                 .withLocation(locationDtoToDao(pantryDto.getLocation()))
@@ -157,14 +135,6 @@ public class Utils {
         return new ExpirationDate.Builder()
                 .withPantryItemId(pantryDto.getPantryItemId())
                 .withExpirationDate(pantryDto.getExpirationDate())
-                .build();
-    }
-
-    public static UsedDate pantryDtoToUsedDateDaoWithoutPantry(PantryDto pantryDto) {
-
-        return new UsedDate.Builder()
-                .withPantryItemId(pantryDto.getPantryItemId())
-                .withUsedDate(pantryDto.getUsedDate())
                 .build();
     }
 

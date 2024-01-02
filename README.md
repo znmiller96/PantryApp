@@ -63,7 +63,8 @@ date variables with varying dates
 
 ## Annotations
 `@AllArgsConstructor` generates a constructor of all class variables for dependency injection
-(ex. `PantryController`)
+
+`@RequiredArgsConstructor` generates a constructor of all final class variables for dependency injection
 
 `@JsonFormat(pattern="yyyy-MM-dd")` sets format the date will be set at when converted to json sting
 

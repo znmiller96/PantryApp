@@ -3,41 +3,42 @@ package com.znmiller96.pantryapi.service;
 import com.znmiller96.pantryapi.model.dao.ExpirationDate;
 import com.znmiller96.pantryapi.model.dao.Measurement;
 import com.znmiller96.pantryapi.model.dao.Pantry;
-import com.znmiller96.pantryapi.model.dao.UsedDate;
 import com.znmiller96.pantryapi.model.dto.PantryDto;
 import com.znmiller96.pantryapi.model.dto.PantryMainPageDto;
 import com.znmiller96.pantryapi.repository.ExpirationDateRepository;
 import com.znmiller96.pantryapi.repository.MeasurementRepository;
 import com.znmiller96.pantryapi.repository.PantryRepository;
-import com.znmiller96.pantryapi.repository.UsedDateRepository;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Component("PantryService")
 public class PantryPageService {
+
+    Logger logger = LoggerFactory.getLogger(PantryPageService.class);
 
     private final PantryRepository pantryRepository;
     private final ExpirationDateRepository expirationDateRepository;
     private final MeasurementRepository measurementRepository;
-    private final UsedDateRepository usedDateRepository;
 
     private final CategoryService categoryService;
 
     private final LocationService locationService;
 
-    //TODO get Pantry page info
-
     public PantryMainPageDto getPantryMainPage(int userId) {
+        //TODO Add a color value for each pantry item based on status (ex. close to expiration, expired, low quantity, etc.)
+        logger.info("Getting home page for user:" + userId);
         return new PantryMainPageDto.Builder()
                 .withLocations(locationService.getLocations(userId))
                 .withCategories(categoryService.getCategories(userId))
-                .withPantry(pantryRepository.findByUserIdAndUsedFalse(userId)
+                .withPantry(pantryRepository.findByUserId(userId)
                         .stream().map(Utils::pantryDaoToDto)
                         .toList())
                 .build();
@@ -51,8 +52,7 @@ public class PantryPageService {
 
     public void updatePantryItem(int userId, PantryDto pantryDto) {
 
-        Pantry pantryItem = Utils.pantryDtoToDaoWithoutExpDateMeasurementUsedDate(userId, pantryDto);
-        //pantryRepository.save(pantryItem);
+        Pantry pantryItem = Utils.pantryDtoToDaoWithoutExpDateMeasurement(userId, pantryDto);
 
         if (pantryDto.getExpirationDate() != null) {
             if (expirationDateRepository.existsById(pantryDto.getPantryItemId())) {
@@ -83,24 +83,11 @@ public class PantryPageService {
             }
         }
 
-        if (pantryDto.getUsedDate() != null) {
-            if (usedDateRepository.existsById(pantryDto.getPantryItemId())) {
-                usedDateRepository.save(Utils.pantryDtoToUsedDateDaoWithoutPantry(pantryDto));
-            }
-            else {
-                UsedDate usedDate = new UsedDate.Builder()
-                        .withUsedDate(pantryDto.getUsedDate())
-                        .build();
-
-                pantryItem.setUsedDate(usedDate);
-                usedDate.setPantry(pantryItem);
-            }
-        }
-
         pantryRepository.save(pantryItem);
     }
 
     public List<PantryDto> getPantryItems(int userid) {
+        logger.info("Getting pantry for user:" + userid);
         return pantryRepository.findByUserId(userid)
                 .stream().map(Utils::pantryDaoToDto)
                 .toList();
@@ -116,5 +103,10 @@ public class PantryPageService {
         return pantryRepository.findByUserIdAndExpirationDate_ExpirationDateBefore(userid, expirationDate)
                 .stream().map(Utils::pantryDaoToDto)
                 .toList();
+    }
+
+    public void deletePantryItem(int pantryItemId, String reasonDelete, boolean addToGroceryList) {
+        pantryRepository.deleteById(pantryItemId);
+        //TODO send reasonDelete and pantryItem to api for analyzing
     }
 }

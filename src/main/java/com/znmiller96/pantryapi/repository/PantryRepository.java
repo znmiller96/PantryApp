@@ -16,5 +16,4 @@ public interface PantryRepository
     //The _ is used to annotate use column in ExpirationDate table
     List<Pantry> findByUserIdAndExpirationDate_ExpirationDateBefore(int userId, Date expirationDate);
 
-    List<Pantry> findByUserIdAndUsedFalse(int UserId);
 }

@@ -32,14 +32,12 @@ public class PantryController {
         pantryPageService.addPantryItem(userId, pantryList);
     }
 
-    //TODO updatePantryItem
     @PostMapping("/update/pantryItem")
     public void updatePantryItem(@RequestParam int userId, @RequestBody PantryItemRequestBody pantryItemRequestBody) {
         PantryDto pantryDto = Utils.pantryItemRequestBodyToDto(pantryItemRequestBody);
         pantryPageService.updatePantryItem(userId, pantryDto);
     }
 
-    //TODO getPantryPage sends formatted info for the user's pantry page
     @GetMapping("/Pantry/MainPage")
     public PantryMainPageDto getPantryMainPage(@RequestParam int userId) {
         return pantryPageService.getPantryMainPage(userId);
@@ -61,5 +59,8 @@ public class PantryController {
         return pantryPageService.getPantryItemsByExpirationDate(userId, formattedExpirationDate);
     }
 
-    //TODO Create endpoint to send list of MeasurementUnit enum
+    @PostMapping("/delete/pantryItem")
+    public void deletePantryItem(@RequestParam int pantryItemId, @RequestParam String reasonDelete, @RequestParam boolean addToGroceryList) {
+        pantryPageService.deletePantryItem(pantryItemId, reasonDelete, addToGroceryList);
+    }
 }
