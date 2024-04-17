@@ -31,14 +31,10 @@ public class Location {
     private int userId;
     private String location;
 
-    @OneToMany(mappedBy = "location")
-    private List<Pantry> pantry;
-
     public Location(Builder builder) {
         this.locationId = builder.locationId;
         this.userId = builder.userId;
         this.location = builder.location;
-        this.pantry = builder.pantry;
     }
 
     public Location() {}
@@ -61,8 +57,6 @@ public class Location {
         private int userId;
         private String location;
         private int locationId;
-        private List<Pantry> pantry;
-
         public Builder withUserId(int userId) {
             this.userId = userId;
             return this;
@@ -75,11 +69,6 @@ public class Location {
 
         public Builder withLocationId(int locationId) {
             this.locationId = locationId;
-            return this;
-        }
-
-        public Builder withPantry(List<Pantry> pantry) {
-            this.pantry = pantry;
             return this;
         }
 

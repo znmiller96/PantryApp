@@ -35,14 +35,10 @@ public class Category {
     private int userId;
     private String category;
 
-    @OneToMany(mappedBy = "category")
-    private List<Pantry> pantry;
-
     private Category(Builder builder) {
         this.categoryId = builder.categoryId;
         this.userId = builder.userId;
         this.category = builder.category;
-        this.pantry = builder.pantry;
     }
 
     public Category() {}
@@ -65,8 +61,6 @@ public class Category {
         private int categoryId;
         private int userId;
         private String category;
-        private List<Pantry> pantry;
-
         public Builder withCategoryId(int categoryId) {
             this.categoryId = categoryId;
             return this;
@@ -79,11 +73,6 @@ public class Category {
 
         public Builder withCategory(String category) {
             this.category = category;
-            return this;
-        }
-
-        public Builder withPantry(List<Pantry> pantry) {
-            this.pantry = pantry;
             return this;
         }
 
