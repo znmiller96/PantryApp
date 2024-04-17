@@ -20,8 +20,8 @@ public class PantryDto {
     @JsonFormat(pattern="yyyy-MM-dd")
     private final Date dayAdded;
     //type could be categories like spices, pasta, rice, bread, etc...
-    private final CategoryDto category;
-    private final LocationDto location;
+    private final String category;
+    private final String location;
     @Nullable
     @JsonFormat(pattern="yyyy-MM-dd")
     private final Date expirationDate;
@@ -60,11 +60,11 @@ public class PantryDto {
         return dayAdded;
     }
 
-    public CategoryDto getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public LocationDto getLocation() {
+    public String getLocation() {
         return location;
     }
 
@@ -84,8 +84,8 @@ public class PantryDto {
         private QuantityLevel quantityLevel;
         private Boolean favorite;
         private Date dayAdded;
-        private CategoryDto category;
-        private LocationDto location;
+        private String category;
+        private String location;
         private Date expirationDate;
         private MeasurementDto measurement;
 
@@ -114,12 +114,12 @@ public class PantryDto {
             return this;
         }
 
-        public Builder withCategory(CategoryDto category) {
+        public Builder withCategory(String category) {
             this.category = category;
             return this;
         }
 
-        public Builder withLocation(LocationDto location) {
+        public Builder withLocation(String location) {
             this.location = location;
             return this;
         }

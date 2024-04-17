@@ -32,10 +32,8 @@ public class Pantry {
     private String quantityLevel;
     private Boolean favorite;
     private Date dayAdded;
-    @ManyToOne
-    private Category category;
-    @ManyToOne
-    private Location location;
+    private String category;
+    private String location;
 
     @OneToOne(mappedBy = "pantry", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
@@ -107,19 +105,19 @@ public class Pantry {
         this.dayAdded = dayAdded;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category categoryId) {
+    public void setCategory(String categoryId) {
         this.category = categoryId;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(Location locationId) {
+    public void setLocation(String locationId) {
         this.location = locationId;
     }
 
@@ -147,8 +145,8 @@ public class Pantry {
         private String quantityLevel;
         private Boolean favorite;
         private Date dayAdded;
-        private Category category;
-        private Location location;
+        private String category;
+        private String location;
 
         public Builder withPantryItemId(int pantryItemId) {
             this.pantryItemId = pantryItemId;
@@ -180,12 +178,12 @@ public class Pantry {
             return this;
         }
 
-        public Builder withCategory(Category category) {
+        public Builder withCategory(String category) {
             this.category = category;
             return this;
         }
 
-        public Builder withLocation(Location location) {
+        public Builder withLocation(String location) {
             this.location = location;
             return this;
         }

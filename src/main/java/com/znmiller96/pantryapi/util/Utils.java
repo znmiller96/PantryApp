@@ -22,14 +22,8 @@ public class Utils {
                 .withQuantityLevel(QuantityLevel.valueOf(pantry.getQuantityLevel()))
                 .withFavorite(pantry.getFavorite())
                 .withDayAdded(pantry.getDayAdded())
-                .withCategory(new CategoryDto.Builder()
-                        .withCategoryId(pantry.getCategory().getCategoryId())
-                        .withCategory(pantry.getCategory().getCategory())
-                        .build())
-                .withLocation(new LocationDto.Builder()
-                        .withLocationId(pantry.getLocation().getLocationId())
-                        .withLocation(pantry.getLocation().getLocation())
-                        .build());
+                .withCategory(pantry.getCategory())
+                .withLocation(pantry.getLocation());
 
         if (pantry.getExpirationDate() != null) {
             pantryBuilder.withExpirationDate(pantry.getExpirationDate().getExpirationDate());
@@ -64,14 +58,8 @@ public class Utils {
                 .withQuantityLevel(pantryItemRequestBody.getQuantityLevel())
                 .withFavorite(pantryItemRequestBody.getFavorite())
                 .withDayAdded(pantryItemRequestBody.getDayAdded())
-                .withCategory(new CategoryDto.Builder()
-                        .withCategoryId(pantryItemRequestBody.getCategory().getCategoryId())
-                        .withCategory(pantryItemRequestBody.getCategory().getCategory())
-                        .build())
-                .withLocation(new LocationDto.Builder()
-                        .withLocationId(pantryItemRequestBody.getLocation().getLocationId())
-                        .withLocation(pantryItemRequestBody.getLocation().getLocation())
-                        .build());
+                .withCategory(pantryItemRequestBody.getCategory())
+                .withLocation(pantryItemRequestBody.getLocation());
 
         if (pantryItemRequestBody.getExpirationDate() != null) {
             pantryBuilder.withExpirationDate(pantryItemRequestBody.getExpirationDate());
@@ -90,8 +78,8 @@ public class Utils {
                 .withQuantityLevel(pantryDto.getQuantityLevel().name())
                 .withFavorite(pantryDto.getFavorite())
                 .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
-                .withCategory(categoryDtoToDao(pantryDto.getCategory()))
-                .withLocation(locationDtoToDao(pantryDto.getLocation()))
+                .withCategory(pantryDto.getCategory())
+                .withLocation(pantryDto.getLocation())
                 .build();
 
         if (pantryDto.getExpirationDate() != null) {
@@ -125,8 +113,8 @@ public class Utils {
                 .withQuantityLevel(pantryDto.getQuantityLevel().name())
                 .withFavorite(pantryDto.getFavorite())
                 .withDayAdded(pantryDto.getDayAdded() != null ? pantryDto.getDayAdded() : new Date())
-                .withCategory(categoryDtoToDao(pantryDto.getCategory()))
-                .withLocation(locationDtoToDao(pantryDto.getLocation()))
+                .withCategory(pantryDto.getCategory())
+                .withLocation(pantryDto.getLocation())
                 .build();
     }
 
