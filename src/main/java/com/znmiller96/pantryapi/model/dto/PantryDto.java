@@ -13,7 +13,7 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PantryDto {
 
-    private final int pantryItemId;
+    private final String pantryItemId;
     private final String name;
     private final QuantityLevel quantityLevel;
     private final Boolean favorite;
@@ -40,7 +40,7 @@ public class PantryDto {
         this.measurement = builder.measurement;
     }
 
-    public int getPantryItemId() {
+    public String getPantryItemId() {
         return pantryItemId;
     }
 
@@ -79,7 +79,7 @@ public class PantryDto {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int pantryItemId;
+        private String pantryItemId;
         private String name;
         private QuantityLevel quantityLevel;
         private Boolean favorite;
@@ -89,7 +89,7 @@ public class PantryDto {
         private Date expirationDate;
         private MeasurementDto measurement;
 
-        public Builder withPantryItemId(int pantryItemId) {
+        public Builder withPantryItemId(String pantryItemId) {
             this.pantryItemId = pantryItemId;
             return this;
         }

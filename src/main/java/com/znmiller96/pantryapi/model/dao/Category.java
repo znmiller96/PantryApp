@@ -3,12 +3,8 @@ package com.znmiller96.pantryapi.model.dao;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -21,17 +17,22 @@ import java.util.List;
 public class Category {
 
     @Id
-    @SequenceGenerator(
-            name = "category_id_sequence",
-            sequenceName = "category_id_sequence",
-            allocationSize = 1,
-            initialValue = 1000
+//    @SequenceGenerator(
+//            name = "category_id_sequence",
+//            sequenceName = "category_id_sequence",
+//            allocationSize = 1,
+//            initialValue = 1000
+//    )
+    @GenericGenerator(
+            name = "category_id_generator",
+            strategy = "com.znmiller96.pantryapi.util.IdGenerator"
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "category_id_sequence"
+//            strategy = GenerationType.SEQUENCE,
+            generator = "category_id_generator"
     )
-    private int categoryId;
+//    @Column(name = "id")
+    private String categoryId;
     private int userId;
     private String category;
 
@@ -43,7 +44,7 @@ public class Category {
 
     public Category() {}
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
@@ -58,10 +59,10 @@ public class Category {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int categoryId;
+        private String categoryId;
         private int userId;
         private String category;
-        public Builder withCategoryId(int categoryId) {
+        public Builder withCategoryId(String categoryId) {
             this.categoryId = categoryId;
             return this;
         }

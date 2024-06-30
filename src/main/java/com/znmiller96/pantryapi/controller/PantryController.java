@@ -7,6 +7,9 @@ import com.znmiller96.pantryapi.service.PantryPageService;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import com.znmiller96.pantryapi.util.Utils;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +23,12 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+//@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("api/v1/pantry")
 public class PantryController {
+
+    Logger logger = LoggerFactory.getLogger(PantryController.class);
 
     private final PantryPageService pantryPageService;
 
@@ -34,6 +40,7 @@ public class PantryController {
 
     @PostMapping("/update/pantryItem")
     public void updatePantryItem(@RequestParam int userId, @RequestBody PantryItemRequestBody pantryItemRequestBody) {
+        logger.info("Update pantry item: {}", pantryItemRequestBody);
         PantryDto pantryDto = Utils.pantryItemRequestBodyToDto(pantryItemRequestBody);
         pantryPageService.updatePantryItem(userId, pantryDto);
     }
@@ -60,7 +67,7 @@ public class PantryController {
     }
 
     @PostMapping("/delete/pantryItem")
-    public void deletePantryItem(@RequestParam int pantryItemId, @RequestParam String reasonDelete, @RequestParam boolean addToGroceryList) {
+    public void deletePantryItem(@RequestParam String pantryItemId, @RequestParam String reasonDelete, @RequestParam boolean addToGroceryList) {
         pantryPageService.deletePantryItem(pantryItemId, reasonDelete, addToGroceryList);
     }
 }

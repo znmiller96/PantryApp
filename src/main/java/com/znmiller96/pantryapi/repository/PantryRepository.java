@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface PantryRepository
-        extends JpaRepository<Pantry, Integer> {
+        extends JpaRepository<Pantry, String> {
 
     List<Pantry> findByUserId(int userId);
 

@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.SequenceGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -16,17 +17,21 @@ import java.util.Date;
 public class Pantry {
 
     @Id
-    @SequenceGenerator(
-            name = "pantry_id_sequence",
-            sequenceName = "pantry_id_sequence",
-            allocationSize = 1,
-            initialValue = 1000
+//    @SequenceGenerator(
+//            name = "pantry_id_sequence",
+//            sequenceName = "pantry_id_sequence",
+//            allocationSize = 1,
+//            initialValue = 1000
+//    )
+    @GenericGenerator(
+            name = "pantry_id_generator",
+            strategy = "com.znmiller96.pantryapi.util.IdGenerator"
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "pantry_id_sequence"
+//            strategy = GenerationType.SEQUENCE,
+            generator = "pantry_id_generator"
     )
-    private int pantryItemId;
+    private String pantryItemId;
     private int userId;
     private String name;
     private String quantityLevel;
@@ -57,11 +62,11 @@ public class Pantry {
         this.location = builder.location;
     }
 
-    public int getPantryItemId() {
+    public String getPantryItemId() {
         return pantryItemId;
     }
 
-    public void setPantryItemId(int id) {
+    public void setPantryItemId(String id) {
         this.pantryItemId = id;
     }
 
@@ -139,7 +144,7 @@ public class Pantry {
 
     public static class Builder {
 
-        private int pantryItemId;
+        private String pantryItemId;
         private int userId;
         private String name;
         private String quantityLevel;
@@ -148,7 +153,7 @@ public class Pantry {
         private String category;
         private String location;
 
-        public Builder withPantryItemId(int pantryItemId) {
+        public Builder withPantryItemId(String pantryItemId) {
             this.pantryItemId = pantryItemId;
             return this;
         }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import jakarta.persistence.*;
+import lombok.Getter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -16,18 +18,21 @@ import java.util.List;
 public class Location {
 
     @Id
-    @SequenceGenerator(
-            name = "location_id_sequence",
-            sequenceName = "location_id_sequence",
-            allocationSize = 1,
-            initialValue = 1000
+//    @SequenceGenerator(
+//            name = "location_id_sequence",
+//            sequenceName = "location_id_sequence",
+//            allocationSize = 1,
+//            initialValue = 1000
+//    )
+    @GenericGenerator(
+            name = "location_id_generator",
+            strategy = "com.znmiller96.pantryapi.util.IdGenerator"
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "location_id_sequence"
+//            strategy = GenerationType.SEQUENCE,
+            generator = "location_id_generator"
     )
-    private int locationId;
-
+    private String locationId;
     private int userId;
     private String location;
 
@@ -39,7 +44,7 @@ public class Location {
 
     public Location() {}
 
-    public int getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
@@ -56,7 +61,7 @@ public class Location {
 
         private int userId;
         private String location;
-        private int locationId;
+        private String locationId;
         public Builder withUserId(int userId) {
             this.userId = userId;
             return this;
@@ -67,7 +72,7 @@ public class Location {
             return this;
         }
 
-        public Builder withLocationId(int locationId) {
+        public Builder withLocationId(String locationId) {
             this.locationId = locationId;
             return this;
         }

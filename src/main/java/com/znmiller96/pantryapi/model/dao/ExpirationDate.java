@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -22,18 +23,22 @@ public class ExpirationDate {
 
     //this is same as pantry id
     @Id
-    @SequenceGenerator(
-            name = "pantry_id_sequence",
-            sequenceName = "pantry_id_sequence",
-            allocationSize = 1,
-            initialValue = 1000
+//    @SequenceGenerator(
+//            name = "pantry_id_sequence",
+//            sequenceName = "pantry_id_sequence",
+//            allocationSize = 1,
+//            initialValue = 1000
+//    )
+    @GenericGenerator(
+            name = "pantry_id_generator",
+            strategy = "com.znmiller96.pantryapi.util.IdGenerator"
     )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "pantry_id_sequence"
+//            strategy = GenerationType.SEQUENCE,
+            generator = "pantry_id_generator"
     )
     @Column(name = "pantryItemId")
-    private int pantryItemId;
+    private String pantryItemId;
     private Date expirationDate;
     @OneToOne
     @JoinColumn(name = "pantryItemId")
@@ -49,7 +54,7 @@ public class ExpirationDate {
         this.pantry = builder.pantry;
     }
 
-    public int getPantryItemId() {
+    public String getPantryItemId() {
         return pantryItemId;
     }
 
@@ -70,7 +75,7 @@ public class ExpirationDate {
     public static class Builder {
 
         private Date expirationDate;
-        private int pantryItemId;
+        private String pantryItemId;
         private Pantry pantry;
 
         public Builder withExpirationDate(Date expirationDate) {
@@ -78,7 +83,7 @@ public class ExpirationDate {
             return this;
         }
 
-        public Builder withPantryItemId(int pantryItemId) {
+        public Builder withPantryItemId(String pantryItemId) {
             this.pantryItemId = pantryItemId;
             return this;
         }

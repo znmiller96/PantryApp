@@ -105,7 +105,7 @@ public class PantryPageService {
                 .toList();
     }
 
-    public void deletePantryItem(int pantryItemId, String reasonDelete, boolean addToGroceryList) {
+    public void deletePantryItem(String pantryItemId, String reasonDelete, boolean addToGroceryList) {
         pantryRepository.deleteById(pantryItemId);
         //TODO send reasonDelete and pantryItem to api for analyzing
     }

@@ -8,14 +8,16 @@ import com.znmiller96.pantryapi.model.dto.LocationDto;
 import com.znmiller96.pantryapi.model.dto.MeasurementDto;
 import com.znmiller96.pantryapi.util.QuantityLevel;
 import jakarta.annotation.Nullable;
+import lombok.Getter;
 
 import java.util.Date;
 
+@Getter
 @JsonDeserialize(builder = PantryItemRequestBody.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PantryItemRequestBody {
 
-    private final int pantryItemId;
+    private final String pantryItemId;
     private final String name;
     private final QuantityLevel quantityLevel;
     private final Boolean favorite;
@@ -41,46 +43,25 @@ public class PantryItemRequestBody {
         this.measurement = builder.measurement;
     }
 
-    public int getPantryItemId() {
-        return pantryItemId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public QuantityLevel getQuantityLevel() {
-        return quantityLevel;
-    }
-
-    public Boolean getFavorite() {
-        return favorite;
-    }
-
-    public Date getDayAdded() {
-        return dayAdded;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public Date getExpirationDate() {
-        return expirationDate;
-    }
-
-    public MeasurementDto getMeasurement() {
-        return measurement;
+    @Override
+    public String toString() {
+        return "PantryItemRequestBody{" +
+                "pantryItemId='" + pantryItemId + '\'' +
+                ", name='" + name + '\'' +
+                ", quantityLevel=" + quantityLevel +
+                ", favorite=" + favorite +
+                ", dayAdded=" + dayAdded +
+                ", category='" + category + '\'' +
+                ", location='" + location + '\'' +
+                ", expirationDate=" + expirationDate +
+                ", measurement=" + measurement +
+                '}';
     }
 
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int pantryItemId;
+        private String pantryItemId;
         private String name;
         private QuantityLevel quantityLevel;
         private Boolean favorite;
@@ -90,7 +71,7 @@ public class PantryItemRequestBody {
         private Date expirationDate;
         private MeasurementDto measurement;
 
-        public Builder withPantryItemId(int pantryItemId) {
+        public Builder withPantryItemId(String pantryItemId) {
             this.pantryItemId = pantryItemId;
             return this;
         }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LocationDto {
 
-    private final int locationId;
+    private final String locationId;
     private final String location;
 
     private LocationDto(Builder builder) {
@@ -16,7 +16,7 @@ public class LocationDto {
         this.location = builder.location;
     }
 
-    public int getLocationId() {
+    public String getLocationId() {
         return locationId;
     }
 
@@ -27,10 +27,10 @@ public class LocationDto {
     @JsonPOJOBuilder(buildMethodName = "build", withPrefix = "with")
     public static class Builder {
 
-        private int locationId;
+        private String locationId;
         private String location;
 
-        public Builder withLocationId(int locationId) {
+        public Builder withLocationId(String locationId) {
             this.locationId = locationId;
             return this;
         }

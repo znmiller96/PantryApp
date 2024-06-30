@@ -137,14 +137,14 @@ public class Utils {
 
     public static Category categoryDtoToDao(CategoryDto categoryDto) {
         return new Category.Builder()
-                .withCategoryId(categoryDto.getCategoryId())
+                //.withCategoryId(categoryDto.getCategoryId())
                 .withCategory(categoryDto.getCategory())
                 .build();
     }
 
     public static Location locationDtoToDao(LocationDto locationDto) {
         return new Location.Builder()
-                .withLocationId(locationDto.getLocationId())
+                //.withLocationId(locationDto.getLocationId())
                 .withLocation(locationDto.getLocation())
                 .build();
     }
